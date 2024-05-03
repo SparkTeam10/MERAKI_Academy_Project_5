@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
+const db= require('./models/db')
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
