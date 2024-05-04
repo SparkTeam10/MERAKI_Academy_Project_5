@@ -1,4 +1,6 @@
 const { pool } = require("../models/db");
+
+
 const createNewRole = (req, res) => {
   const placeholder = req.body;
   pool
@@ -17,6 +19,7 @@ const createNewRole = (req, res) => {
       });
     });
 };
+
 const createNewPermission = (req, res) => {
   const { permission } = req.body;
   pool
@@ -37,6 +40,7 @@ const createNewPermission = (req, res) => {
       });
     });
 };
+
 const createNewRolePermission = (req, res) => {
   const { role_id, permission_id } = req.body;
   pool
