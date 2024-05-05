@@ -56,33 +56,7 @@ VALUES ($1, $2, $3, $4, $5, $6, $7);`
 };
 //-------------------------------------------------
 
-// const registerServiceProvider = (req,res) => {
-//   const {  userName , age, phoneNumber , email, password ,country , provider_id} = req.body;
 
-//     //convert email to lowercase
-//     const lowerEmail = email.toLowerCase();
-
-//     //convert password to Hash
-//     bcryptjs.hash(password,10)
-//     .then((hashPassword)=>{
-//       return pool.query(`INSERT INTO users ( userName , age, phoneNumber , email, password ,country , provider_id ) VALUES ($1, $2, $3, $4, $5, $6, $7 )`,
-//       [ userName ,age, phoneNumber ,lowerEmail,hashPassword,role_id,provider_id]);
-//     })
-//     .then((result) =>{
-//      console.log(result.rows);
-//      res.status(200).json({
-//       success : true,
-//       message : "The account has been created for the service provider"
-//      });
-//     })
-//     .catch((error)=>{
-//       res.status(409).json({
-//           success: false,
-//           message: error.message,
-//           err: error
-//         });
-//     });
-// };
 
 const registerServiceProvider = (req, res) => {
   const { userName, age, phoneNumber, email, password, country,  } = req.body;
@@ -136,7 +110,7 @@ const login = async (req, res) => {
       });
     }
 
-    const query = `SELECT * FROM users WHERE email = $1 `;
+    const query = `SELECT * FROM users WHERE email = $1 `; 
     const data = [email.toLowerCase()];
 
     const result = await pool.query(query, data);
@@ -160,7 +134,7 @@ const login = async (req, res) => {
     const payload = {
       userId: user.id,
       role: user.role_id,
-      // permissions : user.permissions
+      
     };
     console.log(payload);
     
