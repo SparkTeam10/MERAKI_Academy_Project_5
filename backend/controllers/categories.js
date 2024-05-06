@@ -74,7 +74,9 @@ const updateById = (req, res) => {
 const deleteCategory = (req, res) => {
   const { id } = req.params;
   pool
-    .query(`UPDATE categories SET is_deleted = 1 WHERE id = $1 RETURNING *`, [id])
+    .query(`UPDATE categories SET is_deleted = 1 WHERE id = $1 RETURNING *`, [
+      id,
+    ])
     .then((result) => {
       if (result.rows.length) {
         return res.status(201).json({
@@ -83,10 +85,10 @@ const deleteCategory = (req, res) => {
           result: result.rows,
         });
       }
-    //   throw err;
+      //   throw err;
     })
     .catch((err) => {
-        console.log(err);
+      console.log(err);
       res.status(500).json({
         success: false,
         message: `Server error`,
