@@ -68,7 +68,7 @@ is_deleted SMALLINT DEFAULT 0
 CREATE TABLE categories(
 
  id SERIAL PRIMARY KEY,
- name VARCHAR(255),
+ title VARCHAR(255),
  description VARCHAR(255),
  img TEXT,
  is_delete SMALLINT DEFAULT 0 
@@ -77,12 +77,4 @@ CREATE TABLE categories(
 
 -------------------------------
 
-CREATE TABLE categories (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255),
-    description VARCHAR(255),
-    img text, 
-    is_deleted SMALLINT DEFAULT 0
-);
- main
 

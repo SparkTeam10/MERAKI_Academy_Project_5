@@ -9,3 +9,11 @@ userRouter.post("/login" , login)
 
 
 module.exports = userRouter
+//admin
+// {
+//   
+//       "email":"admin@yahoo.com",
+//        "password":"111",
+//        
+
+// }
