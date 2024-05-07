@@ -81,7 +81,7 @@ const deleteCategory = (req, res) => {
       if (result.rows.length) {
         return res.status(201).json({
           success: true,
-          massage: "Product Updated Successfully",
+          massage: "This category has been deleted",
           result: result.rows,
         });
       }

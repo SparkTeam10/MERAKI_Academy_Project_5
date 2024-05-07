@@ -196,9 +196,57 @@ const login =  (req, res) => {
 //     });
 //   }
 };
-
+const getAllUsers=(req,res)=>{
+  pool
+  .query(
+    `
+SELECT * FROM users WHERE is_deleted = 0
+`
+  )
+  .then((result) => {
+    res.status(200).json({
+      success: true,
+      message: `All the users`,
+      result: result.rows,
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: `Server error`,
+      error: err.message,
+    });
+  });
+}
+const deleteUser=(req,res)=>{
+  const { id } = req.params;
+  pool
+    .query(`UPDATE users SET is_deleted = 1 WHERE id = $1 RETURNING *`, [
+      id,
+    ])
+    .then((result) => {
+      if (result.rows.length) {
+        return res.status(201).json({
+          success: true,
+          massage: "user has been deleted",
+          result: result.rows,
+        });
+      }
+        throw err;
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        success: false,
+        message: `Server error`,
+        error: err.message,
+      });
+    });
+}
 module.exports = {
   register,
   registerServiceProvider,
   login,
+  getAllUsers,
+  deleteUser,
 };
