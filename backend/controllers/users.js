@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const saltRounds = parseInt(process.env.SALT);
 
-
 const register = async (req, res) => {
 
   const { userName , age, phoneNumber , email, password ,country } =
