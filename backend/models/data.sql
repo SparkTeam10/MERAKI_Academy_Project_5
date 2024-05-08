@@ -60,14 +60,15 @@ CREATE TABLE categories(
 
 -------------------------------
 CREATE TABLE service_provider (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255),
-    description varchar(255),
+id SERIAL PRIMARY KEY,
+title VARCHAR(255),
+description varchar(255),
 address varchar(255),
-    img text,
-   category_id INT,
+img text,
+price INT,
+category_id INT,
 FOREIGN KEY (category_id) REFERENCES categories(id),
-    is_deleted SMALLINT DEFAULT 0
+is_deleted SMALLINT DEFAULT 0
 );
 -------------------------------
 CREATE TABLE booking (
