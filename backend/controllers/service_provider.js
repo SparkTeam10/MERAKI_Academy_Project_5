@@ -159,10 +159,40 @@ const readById=(req,res)=>{
         });
       });
 }
+
+const getServiceProviderByCategory =(req,res)=>{
+  const {category_id}=req.params
+  pool
+  .query(`SELECT * FROM service_provider WHERE is_deleted = 0 AND category_id = $1`,[category_id])
+
+  .then((result) => {
+    if (result.rows.length) {
+      res.status(200).json({
+        success: true,
+        message: `service_provider by category id= ${category_id}`,
+        result: result.rows,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: `There is no service_provider by category with id =${category_id}`,
+      });
+    }
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: `Server error`,
+      error: err.message,
+    });
+  });
+}
+
 module.exports = {
   createServiceProvider,
   updateServiceProviderById,
   readAllServiceProvider,
   deleteServiceProvider,
   readById,
+  getServiceProviderByCategory
 };

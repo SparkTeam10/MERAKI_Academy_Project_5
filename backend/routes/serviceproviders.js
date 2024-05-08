@@ -8,6 +8,7 @@ const {
   readAllServiceProvider,
   deleteServiceProvider,
   readById,
+  getServiceProviderByCategory
 } = require("../controllers/service_provider");
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
@@ -35,5 +36,8 @@ serviceProvidersRouter.delete(
   deleteServiceProvider
 );
 serviceProvidersRouter.get("/:id", readById);
+
+
+serviceProvidersRouter.get("/",getServiceProviderByCategory)
 
 module.exports = serviceProvidersRouter;
