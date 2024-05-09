@@ -70,7 +70,7 @@ FOREIGN KEY (category_id) REFERENCES categories(id),
 is_deleted SMALLINT DEFAULT 0
 );
 -------------------------------
- main
+ 
 CREATE TABLE booking (
 id SERIAL PRIMARY KEY,
 user_id INT,
@@ -84,7 +84,7 @@ created_at TIMESTAMP DEFAULT NOW(),
 booking_status VARCHAR DEFAULT 'Confirmed',
 is_deleted SMALLINT DEFAULT 0
 );
-getUserByName
+
 
 -------------------------
 
