@@ -11,14 +11,22 @@ const roleRouter = require("./routes/role");
 const userRouter = require("./routes/users");
 const categoryRouter = require("./routes/categories");
 const serviceProvidersRouter = require("./routes/serviceproviders")
+
 const imagesRouter =require('./routes/images')
+
+
+const bookingRouter = require("./routes/booking")
 
 // Handles any other endpoints [unassigned - endpoints]
 app.use("/roles", roleRouter);
 app.use("/users", userRouter);
 app.use("/category", categoryRouter);
 app.use("/serviceProvider",serviceProvidersRouter)
+
 app.use('/images',imagesRouter)
+
+app.use("/booking" , bookingRouter)
+
 
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
