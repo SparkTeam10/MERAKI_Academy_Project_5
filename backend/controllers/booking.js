@@ -103,7 +103,8 @@ const ReadAllByUserId = (req, res) => {
 
 
 module.exports = {
-  createBooking,
+ createBooking,
   updateBookingById,
   ReadAllByUserId,
 };
+
