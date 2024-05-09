@@ -162,6 +162,7 @@ const readById=(req,res)=>{
 
 const getServiceProviderByCategory =(req,res)=>{
   const {category_id}=req.params
+  console.log(category_id);
   pool
   .query(`SELECT * FROM service_provider WHERE is_deleted = 0 AND category_id = $1`,[category_id])
 

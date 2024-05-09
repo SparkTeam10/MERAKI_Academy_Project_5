@@ -143,90 +143,72 @@ const login = (req, res) => {
         err,
       });
     });
-getUserByName
-  });
-
-
-  //   try {
-  //     if (!email || !password) {
-  //       return res.status(400).json({
-  //         success: false,
-  //         message: " Email and password are required ",
-  //       });
-  //     }
-
-  //     const query = `SELECT * FROM users WHERE email = $1 `;
-  //     const data = [email.toLowerCase()];
-
-  //     const result = await pool.query(query, data);
-
-  //     if (result.rows.length === 0) {
-  //       return res.status(401).json({
-  //         success: false,
-  //         message: "Invalid email or password.",
-  //       });
-  //     }
-  //     const user = result.rows[0];
-
-  //     const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-  //     if (!isPasswordCorrect) {
-  //       return res.status(401).json({
-  //         success: false,
-  //         message: "Invalid email or password.",
-  //       });
-  //     }
-  //     const payload = {
-  //       userId: user.id,
-  //       role: user.role_id,
-  //     };
-  //     console.log(payload);
-
-  //     const Secret = process.env.SECRET;
-  //     const options = { expiresIn: "1d" };
-
-  //     const token = jwt.sign(payload, Secret, options);
-
-  //     if (!token) {
-  //       throw new Error("Token generation failed.");
-  //     }
-
-  //     return res.status(200).json({
-  //       success: true,
-  //       message: " Login successful. ",
-  //       token,
-  //       userId: user.id,
-  //     });
-  //   } catch (error) {
-  //     console.error("Error during login : ", error);
-  //     res.status(500).json({
-  //       success: false,
-  //       message: "Internal server error.",
-  //     });
-  //   }
-main
 };
+
+//   try {
+//     if (!email || !password) {
+//       return res.status(400).json({
+//         success: false,
+//         message: " Email and password are required ",
+//       });
+//     }
+
+//     const query = `SELECT * FROM users WHERE email = $1 `;
+//     const data = [email.toLowerCase()];
+
+//     const result = await pool.query(query, data);
+
+//     if (result.rows.length === 0) {
+//       return res.status(401).json({
+//         success: false,
+//         message: "Invalid email or password.",
+//       });
+//     }
+//     const user = result.rows[0];
+
+//     const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+//     if (!isPasswordCorrect) {
+//       return res.status(401).json({
+//         success: false,
+//         message: "Invalid email or password.",
+//       });
+//     }
+//     const payload = {
+//       userId: user.id,
+//       role: user.role_id,
+//     };
+//     console.log(payload);
+
+//     const Secret = process.env.SECRET;
+//     const options = { expiresIn: "1d" };
+
+//     const token = jwt.sign(payload, Secret, options);
+
+//     if (!token) {
+//       throw new Error("Token generation failed.");
+//     }
+
+//     return res.status(200).json({
+//       success: true,
+//       message: " Login successful. ",
+//       token,
+//       userId: user.id,
+//     });
+//   } catch (error) {
+//     console.error("Error during login : ", error);
+//     res.status(500).json({
+//       success: false,
+//       message: "Internal server error.",
+//     });
+//   }
+
 const getAllUsers = (req, res) => {
   pool
     .query(
       `
-SELECT * FROM users WHERE is_deleted = 0
+SELECT * FROM users WHERE is_deleted = 0 AND role_id=2
 `
-getUserByName
-  )
-  .then((result) => {
-    res.status(200).json({
-      success: true,
-      message: `All the users`,
-      result: result.rows,
-    });
-  })
-  .catch((err) => {
-    res.status(500).json({
-      success: false,
-      message: `Server error`,
-      error: err.message
-
     )
     .then((result) => {
       res.status(200).json({
@@ -241,9 +223,9 @@ getUserByName
         message: `Server error`,
         error: err.message,
       });
- main
     });
 };
+
 const deleteUser = (req, res) => {
   const { id } = req.params;
   pool
@@ -266,39 +248,30 @@ const deleteUser = (req, res) => {
         error: err.message,
       });
     });
-getUserByName
-}
-
-const getUserByName = (req,res)=>{
-  const {userName} = req.params
-  pool
-  .query(` SELECT * FROM users WHERE userName = $1  `, [userName]
-  
-  )
-  .then((result)=>{
-    console.log(result);
-    res.status(200).json({
-      success : true , 
-      massage : `Get the user by Name `,
-      result : result.rows
-    })
-  })
-  .catch((err)=>{
-    console.log(err);
-    res.status(500).json({
-      success : false , 
-      message : `Server error`,
-      error : err.result
-    })
-  })
-
-}
-
-
-
-
-
 };
+
+const getUserByName = (req, res) => {
+  const { userName } = req.params;
+  pool
+    .query(` SELECT * FROM users WHERE userName = $1  `, [userName])
+    .then((result) => {
+      console.log(result);
+      res.status(200).json({
+        success: true,
+        massage: `Get the user by Name `,
+        result: result.rows,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        success: false,
+        message: `Server error`,
+        error: err.result,
+      });
+    });
+};
+
 const getUserById = (req, res) => {
   const { id } = req.params;
   pool
@@ -330,16 +303,35 @@ SELECT * FROM users WHERE is_deleted = 0 AND id=$1
       });
     });
 };
- main
+const getProvider=(req,res)=>{
+  pool
+  .query(
+    `
+SELECT * FROM users WHERE is_deleted = 0 AND role_id=3
+`
+  )
+  .then((result) => {
+    res.status(200).json({
+      success: true,
+      message: `All the service providers`,
+      result: result.rows,
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: `Server error`,
+      error: err.message,
+    });
+  });
+}
 module.exports = {
   register,
   registerServiceProvider,
   login,
   getAllUsers,
   deleteUser,
-getUserByName
-  getUserByName
-
+  getUserByName,
   getUserById,
-main
+  getProvider,
 };

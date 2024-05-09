@@ -8,11 +8,10 @@ const {
   login,
   getAllUsers,
   deleteUser,
+  getUserById,
+  getProvider,
 getUserByName
-  getUserByName
-
- main
-} = require("../controllers/users");
+ } = require("../controllers/users");
 
 userRouter.post("/register", register);
 userRouter.post("/ServiceProvider", registerServiceProvider);
@@ -20,8 +19,7 @@ userRouter.post("/login", login);
 userRouter.get(
   "/",
   authentication,
-  authorization("create_category"),
-  getAllUsers
+    getAllUsers
 );
 userRouter.delete(
   "/:id",
@@ -29,12 +27,10 @@ userRouter.delete(
   authorization("delete_category"),
   deleteUser
 );
- getUserByName
-userRouter.get("/:userName" , getUserByName)
+userRouter.get('/provider',authentication,authorization("delete_category"),getProvider)
+userRouter.get("/:userName" ,authentication, getUserByName)
+userRouter.get('/user/:id',authentication,getUserById)
 
-
-userRouter.get('/:id',authentication,getUserById)
-main
 module.exports = userRouter;
 //admin
 // {
