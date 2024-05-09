@@ -8,7 +8,10 @@ const {
   login,
   getAllUsers,
   deleteUser,
-  getUserById
+getUserByName
+  getUserByName
+
+ main
 } = require("../controllers/users");
 
 userRouter.post("/register", register);
@@ -26,7 +29,12 @@ userRouter.delete(
   authorization("delete_category"),
   deleteUser
 );
+ getUserByName
+userRouter.get("/:userName" , getUserByName)
+
+
 userRouter.get('/:id',authentication,getUserById)
+main
 module.exports = userRouter;
 //admin
 // {

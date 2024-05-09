@@ -143,6 +143,10 @@ const login = (req, res) => {
         err,
       });
     });
+getUserByName
+  });
+
+
   //   try {
   //     if (!email || !password) {
   //       return res.status(400).json({
@@ -200,6 +204,7 @@ const login = (req, res) => {
   //       message: "Internal server error.",
   //     });
   //   }
+main
 };
 const getAllUsers = (req, res) => {
   pool
@@ -207,6 +212,21 @@ const getAllUsers = (req, res) => {
       `
 SELECT * FROM users WHERE is_deleted = 0
 `
+getUserByName
+  )
+  .then((result) => {
+    res.status(200).json({
+      success: true,
+      message: `All the users`,
+      result: result.rows,
+    });
+  })
+  .catch((err) => {
+    res.status(500).json({
+      success: false,
+      message: `Server error`,
+      error: err.message
+
     )
     .then((result) => {
       res.status(200).json({
@@ -221,6 +241,7 @@ SELECT * FROM users WHERE is_deleted = 0
         message: `Server error`,
         error: err.message,
       });
+ main
     });
 };
 const deleteUser = (req, res) => {
@@ -245,6 +266,38 @@ const deleteUser = (req, res) => {
         error: err.message,
       });
     });
+getUserByName
+}
+
+const getUserByName = (req,res)=>{
+  const {userName} = req.params
+  pool
+  .query(` SELECT * FROM users WHERE userName = $1  `, [userName]
+  
+  )
+  .then((result)=>{
+    console.log(result);
+    res.status(200).json({
+      success : true , 
+      massage : `Get the user by Name `,
+      result : result.rows
+    })
+  })
+  .catch((err)=>{
+    console.log(err);
+    res.status(500).json({
+      success : false , 
+      message : `Server error`,
+      error : err.result
+    })
+  })
+
+}
+
+
+
+
+
 };
 const getUserById = (req, res) => {
   const { id } = req.params;
@@ -277,11 +330,16 @@ SELECT * FROM users WHERE is_deleted = 0 AND id=$1
       });
     });
 };
+ main
 module.exports = {
   register,
   registerServiceProvider,
   login,
   getAllUsers,
   deleteUser,
+getUserByName
+  getUserByName
+
   getUserById,
+main
 };
