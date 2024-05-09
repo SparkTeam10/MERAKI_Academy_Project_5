@@ -2,13 +2,13 @@ const {pool} = require("../models/db")
 
 
 const createBooking = (req,res)=>{
-    const { user_id , serviceProvider_id, start_date, end_date, price , created_at ,booking_status } =req.body
+    const { user_id , serviceProvider_id,  price  } =req.body
 
     
-    const query = (`INSERT INTO booking (user_id , serviceProvider_id, start_date, end_date, price , created_at ,booking_status )
-    VALUES ($1 , $2, $3 , $4 , $5 ,$6 , $7)`)
+    const query = (`INSERT INTO booking (user_id , serviceProvider_id,  price )
+    VALUES ($1 , $2, $3 ) RETURNING * `)
 
-    const data = [user_id , serviceProvider_id, start_date, end_date, price , created_at ,booking_status]
+    const data = [user_id , serviceProvider_id, price  ]
 
     pool
     .query(query,data)
@@ -19,30 +19,19 @@ const createBooking = (req,res)=>{
         Booking : result.rows
      })
     })
-
-    .catch((error)=>{
-        res.status().json({
+    .catch((err)=>{
+        res.status(500).json({
             success : false , 
             message : ` Please try agian something went wrong `,
-            error : message.error
+            error : err.message
         })
     })
 
 }
 
- const updateById = (req,res) => {
-        
-        const {  } = req.body
-    
-
-
-
- }
-
-
-
 
 
 module.exports = {
-    createBooking
+    createBooking , 
+    updateBookingById
 }
