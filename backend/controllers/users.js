@@ -11,8 +11,10 @@ const register = async (req, res) => {
 
   const encryptedPassword = await bcrypt.hash(password, saltRounds);
 
-  const query = `  INSERT INTO users (userName, age, phoneNumber, email, password, country,image, role_id ) 
-VALUES ($1, $2, $3, $4, $5, $6, $7,$8);`;
+  const query = `  
+  INSERT INTO users (userName, age, phoneNumber, email, password, country,image, role_id ) 
+ VALUES ($1, $2, $3, $4, $5, $6, $7,$8); 
+ ` ;
 
   const data = [
     userName,
@@ -145,63 +147,7 @@ const login = (req, res) => {
     });
 };
 
-//   try {
-//     if (!email || !password) {
-//       return res.status(400).json({
-//         success: false,
-//         message: " Email and password are required ",
-//       });
-//     }
 
-//     const query = `SELECT * FROM users WHERE email = $1 `;
-//     const data = [email.toLowerCase()];
-
-//     const result = await pool.query(query, data);
-
-//     if (result.rows.length === 0) {
-//       return res.status(401).json({
-//         success: false,
-//         message: "Invalid email or password.",
-//       });
-//     }
-//     const user = result.rows[0];
-
-//     const isPasswordCorrect = await bcrypt.compare(password, user.password);
-
-//     if (!isPasswordCorrect) {
-//       return res.status(401).json({
-//         success: false,
-//         message: "Invalid email or password.",
-//       });
-//     }
-//     const payload = {
-//       userId: user.id,
-//       role: user.role_id,
-//     };
-//     console.log(payload);
-
-//     const Secret = process.env.SECRET;
-//     const options = { expiresIn: "1d" };
-
-//     const token = jwt.sign(payload, Secret, options);
-
-//     if (!token) {
-//       throw new Error("Token generation failed.");
-//     }
-
-//     return res.status(200).json({
-//       success: true,
-//       message: " Login successful. ",
-//       token,
-//       userId: user.id,
-//     });
-//   } catch (error) {
-//     console.error("Error during login : ", error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Internal server error.",
-//     });
-//   }
 
 const getAllUsers = (req, res) => {
   pool
@@ -303,6 +249,7 @@ SELECT * FROM users WHERE is_deleted = 0 AND id=$1
       });
     });
 };
+
 const getProvider=(req,res)=>{
   pool
   .query(
@@ -325,6 +272,7 @@ SELECT * FROM users WHERE is_deleted = 0 AND role_id=3
     });
   });
 }
+
 module.exports = {
   register,
   registerServiceProvider,
