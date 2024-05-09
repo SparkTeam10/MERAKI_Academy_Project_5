@@ -5,12 +5,15 @@ const authorization = require("../middleware/authorization")
 
 
 
-const {createBooking} = require("../controllers/booking")
+const { createBooking , updateBookingById, ReadAllByUserId } = require("../controllers/booking")
 
 
 
-bookingRouter.post("/", createBooking)
+bookingRouter.post("/",authentication,authorization("create_booking"), createBooking)
 
+bookingRouter.put("/:id",authentication , authorization("create_category"),updateBookingById)
+
+bookingRouter.get("/:user_id" ,authentication , ReadAllByUserId )
 
 
 
