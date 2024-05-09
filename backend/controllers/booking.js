@@ -33,5 +33,5 @@ const createBooking = (req,res)=>{
 
 module.exports = {
     createBooking , 
-    updateBookingById
+    // updateBookingById
 }
