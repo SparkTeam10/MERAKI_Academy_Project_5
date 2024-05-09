@@ -26,39 +26,22 @@ FOREIGN KEY (permission_id) REFERENCES permissions (id),
 
 PRIMARY KEY (id) );
 -------------------------
-main
+-------------------------
+
 CREATE TABLE users(
 
 id SERIAL PRIMARY KEY NOT NULL,
-
 userName VARCHAR(255) NOT NULL UNIQUE,
-
 age INT,
-
- TEST
 phoneNumber INT,
-
-phone VARCHAR(255),
- main
-
 email VARCHAR(255) NOT NULL UNIQUE,
-
 password VARCHAR(255) NOT NULL,
-
- TEST
 country VARCHAR(255),
-
-
- main
+img text,
 role_id INT,
-
 FOREIGN KEY (role_id) REFERENCES roles(id),
-
 is_deleted SMALLINT DEFAULT 0
-
 );
- TEST
-
 -------------------------------
 
 CREATE TABLE categories(
@@ -71,8 +54,23 @@ CREATE TABLE categories(
  
 )
 
+getUserByName
 -----------------------------------------
 
+
+CREATE TABLE service_provider (
+id SERIAL PRIMARY KEY,
+title VARCHAR(255),
+description varchar(255),
+address varchar(255),
+img text,
+price INT,
+category_id INT,
+FOREIGN KEY (category_id) REFERENCES categories(id),
+is_deleted SMALLINT DEFAULT 0
+);
+-------------------------------
+ main
 CREATE TABLE booking (
 id SERIAL PRIMARY KEY,
 user_id INT,
@@ -86,6 +84,7 @@ created_at TIMESTAMP DEFAULT NOW(),
 booking_status VARCHAR DEFAULT 'Confirmed',
 is_deleted SMALLINT DEFAULT 0
 );
+getUserByName
 
 -------------------------
 
@@ -99,4 +98,6 @@ address varchar(255),
 FOREIGN KEY (category_id) REFERENCES categories(id),
     is_deleted SMALLINT DEFAULT 0
 );
+
+ main
 
