@@ -147,8 +147,6 @@ const login = (req, res) => {
     });
 };
 
-
-
 const getAllUsers = (req, res) => {
   pool
     .query(

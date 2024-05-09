@@ -53,7 +53,8 @@ const updateById = (req, res) => {
   const { id } = req.params;
   const { title, description, img } = req.body;
   const values = [title || null, description || null, img || null, id];
-  const query = `UPDATE categories SET title=COALESCE($1,title),description=COALESCE($2,description),img=COALESCE($3,img) WHERE id=$4 RETURNING *;`;
+  const query = `UPDATE categories SET title=COALESCE($1,title),description=COALESCE($2,description),
+  img=COALESCE($3,img) WHERE id=$4 RETURNING *;`;
 
   
   pool
