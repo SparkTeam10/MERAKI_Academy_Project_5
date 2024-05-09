@@ -7,9 +7,6 @@ role VARCHAR(255) NOT NULL,
 PRIMARY KEY (id) );
 TEST
 
--------------------------------
-
-
 --------------------
 CREATE TABLE permissions (
 id SERIAL NOT NULL,
@@ -19,7 +16,6 @@ PRIMARY KEY (id) );
 
 CREATE TABLE role_permission ( 
 id SERIAL NOT NULL,
-
 role_id INT,
 
 permission_id INT,
@@ -75,6 +71,32 @@ CREATE TABLE categories(
  
 )
 
--------------------------------
+-----------------------------------------
 
+CREATE TABLE booking (
+id SERIAL PRIMARY KEY,
+user_id INT,
+FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+serviceProvider_id INT,
+FOREIGN KEY (serviceProvider_id) REFERENCES service_provider (id)ON DELETE CASCADE,
+start_date TIMESTAMP DEFAULT NOW(),
+end_date TIMESTAMP DEFAULT NOW(),
+price INT,
+created_at TIMESTAMP DEFAULT NOW(),
+booking_status VARCHAR DEFAULT 'Confirmed',
+is_deleted SMALLINT DEFAULT 0
+);
+
+-------------------------
+
+CREATE TABLE service_provider (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    description varchar(255),
+address varchar(255),
+    img text,
+   category_id INT,
+FOREIGN KEY (category_id) REFERENCES categories(id),
+    is_deleted SMALLINT DEFAULT 0
+);
 

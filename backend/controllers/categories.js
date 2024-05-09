@@ -1,4 +1,5 @@
 const { pool } = require("../models/db");
+
 const createCategory = (req, res) => {
   const { title, description, img } = req.body;
   pool
@@ -24,6 +25,7 @@ const createCategory = (req, res) => {
       });
     });
 };
+
 const getAllCategories = (req, res) => {
   pool
     .query(
@@ -46,11 +48,14 @@ SELECT * FROM categories WHERE is_deleted = 0
       });
     });
 };
+
 const updateById = (req, res) => {
   const { id } = req.params;
   const { title, description, img } = req.body;
   const values = [title || null, description || null, img || null, id];
   const query = `UPDATE categories SET title=COALESCE($1,title),description=COALESCE($2,description),img=COALESCE($3,img) WHERE id=$4 RETURNING *;`;
+
+  
   pool
     .query(query, values)
     .then((result) => {
@@ -71,6 +76,7 @@ const updateById = (req, res) => {
       });
     });
 };
+
 const deleteCategory = (req, res) => {
   const { id } = req.params;
   pool
