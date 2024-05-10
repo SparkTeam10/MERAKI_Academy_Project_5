@@ -50,7 +50,7 @@ const updateBookingById = (req, res) => {
       if (result.rows.length) {
         res.status(201).json({
           success: true,
-          message: `Booking Updated Successfully `,
+          message: `Booking updated by id successfully `,
           result: result.rows,
         });
       }
@@ -101,10 +101,97 @@ const ReadAllByUserId = (req, res) => {
 };
 
 
+const updateByUserId = (req, res)=>{
+    const {user_id} = req.params
+    const { serviceProvider_id, start_date, end_date, price } = req.body;
+    
+
+    const query = (` UPDATE booking
+        SET serviceProvider_id = COALESCE($1, serviceProvider_id),
+        start_date = COALESCE($2, start_date),
+        end_date = COALESCE($3, end_date),
+        price = COALESCE($4, price)
+        WHERE user_id = $5 AND is_deleted = 0 RETURNING * `)
+
+    const data = [
+        serviceProvider_id || null,
+        start_date || null,
+        end_date || null,
+        price || null,
+        user_id ]
+
+    pool
+    .query(query,data)
+    .then((result)=>{
+        if(result.rows.length){
+            res.status(201).json({
+                success : true , 
+                message : `Booking updated by user_id successfully`,
+                result : result.rows
+            })
+        }else{
+            res.status(201).json({
+                success : false , 
+                message : `There is no booking for this user_id yet`,
+                result : result.rows
+            })
+
+        }
+    })
+    .catch((err)=>{
+        console.log("THIS ERROR>>>>>>>>>>>>>>>>>",err);
+      res.status(500).json({
+        success: false,
+        message: ` Server Error`,
+        error: err.message,
+      });
+
+    })
+
+}
+
+const deleteById = (req,res)=>{
+    const {id} = req.params
+    
+    const query = (` UPDATE booking SET is_deleted = 1 WHERE id = $1 RETURNING * `)
+    const data = [ id ]
+
+    pool
+    .query(query,data)
+    .then((result)=>{
+        if(result.rows.length){
+            res.status(201).json({
+                success : true , 
+                message : `this booking has been delete by id successfully`,
+                result : result.rows
+            })
+        }else{
+            res.status(201).json({
+                success : false , 
+                message : ` There is no booking `,
+                result : result.rows
+            })
+
+        }
+        })
+        .catch((err)=>{
+            console.log(" The Error >> ",err);
+          res.status(500).json({
+            success: false,
+            message: ` Server Error`,
+            error: err.message,
+          });
+    
+        })
+    
+
+}
 
 module.exports = {
  createBooking,
   updateBookingById,
   ReadAllByUserId,
+  updateByUserId,
+  deleteById
 };
 
