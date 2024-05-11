@@ -4,6 +4,8 @@ import Home from "../pages/Home/index"
 import About from "../pages/About/index"
 import Help from "../Layout/Help"
 import NotFound from "../pages/NotFound"
+import Category,{ allCategory } from "../pages/categories"
+// import { allCategory } from "../Service/api/categories";
 export const router= createBrowserRouter([
 {
     path: "/",
@@ -22,6 +24,11 @@ export const router= createBrowserRouter([
             element:<Help/> 
         },
     ]
+},
+{
+    path: "/category",
+    element: <Category/>, 
+    loader:allCategory
 },
 {
     path: "*",
