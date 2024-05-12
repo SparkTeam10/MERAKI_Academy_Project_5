@@ -99,5 +99,20 @@ FOREIGN KEY (category_id) REFERENCES categories(id),
     is_deleted SMALLINT DEFAULT 0
 );
 
- main
+ CREATE TABLE images (
+
+id SERIAL PRIMARY KEY,
+
+img text,
+
+price INT,
+
+category_id INT,
+
+FOREIGN KEY (category_id) REFERENCES categories(id),
+
+serviceProvider_id INT,
+
+FOREIGN KEY (serviceProvider_id) REFERENCES service_provider (id),  is_deleted SMALLINT DEFAULT 0 );
+
 
