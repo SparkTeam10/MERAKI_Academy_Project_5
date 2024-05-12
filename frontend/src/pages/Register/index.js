@@ -1,19 +1,21 @@
-import React, { useState,Suspense } from "react";
-import { useLoaderData, useNavigate,Await, } from "react-router-dom";
+import React, { useState, Suspense } from "react";
+import { useLoaderData, useNavigate, Await } from "react-router-dom";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
 export default function Register() {
   const navigate = useNavigate();
-//   const {results}=useLoaderData()
+  //   const {results}=useLoaderData()
   const [userName, setUserName] = useState("");
   const [country, setCountry] = useState("");
   const [PhoneNumber, setPhoneNumber] = useState(0);
   const [age, setAge] = useState(0);
   const [image, setImage] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
+  const [error1, setError] = useState("");
+  const [status, setStatus] = useState(false);
   // const [message, setMessage] = useState("");
   const [password, setPassword] = useState("");
-   return (
+  return (
     <div>
       <input
         placeholder="userName"
@@ -64,35 +66,79 @@ export default function Register() {
           setPassword(e.target.value);
         }}
       />
-      <button onClick={()=>{
-         axios.post(`http://localhost:5001/users/register`, {
-            userName,
-            age,
-            PhoneNumber,
-            email,
-            password,
-            country,
-            image,
-          })
-      }}>register</button>
-   
-     {/* {
-    error && <p>{error}</p>
-     } */}
-      <button
+      <Button
+        variant="primary"
         onClick={() => {
-          navigate("/");
+          axios
+            .post(`http://localhost:5001/users/register`, {
+              userName,
+              age,
+              PhoneNumber,
+              email,
+              password,
+              country,
+              image,
+            })
+            .then((result) => {
+              setStatus(true);
+              setError(result.data.message);
+              console.log(result.data.message);
+            })
+            .catch((error) => {
+              setStatus(true);
+              setError("The email already exists");
+            });
         }}
       >
-        Home
-      </button>
-      <button
+        User Register
+      </Button>{" "}
+      <Button
+        variant="primary"
         onClick={() => {
-          navigate(-1);
+          axios
+            .post(`http://localhost:5001/users/ServiceProvider`, {
+              userName,
+              age,
+              PhoneNumber,
+              email,
+              password,
+              country,
+              image,
+            })
+            .then((result) => {
+              setStatus(true);
+              setError(result.data.message);
+              console.log(result.data.message);
+            })
+            .catch((error) => {
+              setStatus(true);
+              setError("The email already exists");
+            });
         }}
       >
-        Back
-      </button>
+        Service Provider Register
+      </Button>{" "}
+      <br />
+      {status && <>{error1}</>}
+      <br />
+      <div>
+        <Button
+          variant="dark"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Home
+        </Button>
+        <Button
+          variant="dark"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </Button>
+      </div>
     </div>
   );
 }
