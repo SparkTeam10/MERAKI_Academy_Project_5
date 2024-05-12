@@ -4,7 +4,9 @@ import Home from "../pages/Home/index"
 import About from "../pages/About/index"
 import Help from "../Layout/Help"
 import NotFound from "../pages/NotFound"
+import Register,{getRegister} from "../pages/Register"
 import Category,{ allCategory } from "../pages/categories"
+
 // import { allCategory } from "../Service/api/categories";
 export const router= createBrowserRouter([
 {
@@ -29,6 +31,11 @@ export const router= createBrowserRouter([
     path: "/category",
     element: <Category/>, 
     loader:allCategory
+},
+{
+    path: "/register",
+    element: <Register/>, 
+    // loader:getRegister
 },
 {
     path: "*",
