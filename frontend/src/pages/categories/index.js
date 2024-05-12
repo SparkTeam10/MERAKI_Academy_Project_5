@@ -1,8 +1,9 @@
 import React,{Suspense} from 'react'
 import axios from "axios"
-import { useLoaderData,Await } from 'react-router-dom'
+import { useLoaderData,Await, useNavigate } from 'react-router-dom'
 export default function Category  ()  {
   const {results}=useLoaderData()
+  const navigate = useNavigate();
   return (
     <div>
         <h1>Category</h1>
@@ -24,6 +25,12 @@ export default function Category  ()  {
 }}
 </Await>
 </Suspense>
+<button  onClick={() => {
+          navigate("/");
+        }}>Home</button>
+        <button  onClick={() => {
+          navigate(-1);
+        }}>Back</button>
     </div>
   )
 }
