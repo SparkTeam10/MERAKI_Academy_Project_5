@@ -35,6 +35,6 @@ export default function Category  ()  {
   )
 }
 export const allCategory= async()=>{
-  const results= axios.get(`http://localhost:5000/category/`);
+  const results= axios.get(`http://localhost:5001/category/`);
   return {results}
 }
