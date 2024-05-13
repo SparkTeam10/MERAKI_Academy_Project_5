@@ -1,0 +1,51 @@
+.b1{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .b11{
+    background-color: rgb(88, 88, 245);
+     }
+   .cat{
+    display: flex;
+    flex-direction: column;
+justify-content: center;
+align-items: center;
+   } 
+ 
+.cat1{
+    display: flex;
+    flex-direction: column;
+justify-content: center;
+align-items: center;
+   }
+.cat1 img{
+   height: 400px;
+   width: 500px;
+   }
+   .par{
+    align-self: center;
+   }
+   .container {
+    position: relative;
+    width: fit-content;
+  }
+  
+  .description {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    width: 95%;
+  }
+  
+  .image:hover + .description {
+    display: block;
+  }
+  .cat2{
+    display:  grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
