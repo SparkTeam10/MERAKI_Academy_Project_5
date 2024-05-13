@@ -1,0 +1,19 @@
+.user{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+   gap: 10px;
+}
+.userCart{
+    border: 2px solid black;
+}
+.user img{
+    width: 150px;
+    height: 150px;
+}
+.delete{
+    background-color: red;
+}
+.h{
+    display: flex;
+    gap: 5px;
+}

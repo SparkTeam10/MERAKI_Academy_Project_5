@@ -176,7 +176,7 @@ const getServiceProviderByCategory =(req,res)=>{
     } else {
       res.status(200).json({
         success: true,
-        message: `There is no service_provider by category with id =${category_id}`,
+        message: `There is no service_provider by category with this id`,
       });
     }
   })

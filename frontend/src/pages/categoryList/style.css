@@ -1,0 +1,16 @@
+.ser{
+    display:  grid;
+    flex-wrap: nowrap;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+   }
+.ser1{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ser img{
+    height: 400px;
+    width: 500px;
+    }

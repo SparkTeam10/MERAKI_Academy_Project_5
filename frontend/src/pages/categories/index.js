@@ -1,40 +1,68 @@
-import React,{Suspense} from 'react'
-import axios from "axios"
-import { useLoaderData,Await, useNavigate } from 'react-router-dom'
-export default function Category  ()  {
-  const {results}=useLoaderData()
+import React, { Suspense } from "react";
+import axios from "axios";
+import Button from "react-bootstrap/Button";
+import "./style.css";
+import Modal from "react-bootstrap/Modal";
+import Image from "react-bootstrap/Image";
+import { Container, Row, Col, ListGroup } from "react-bootstrap";
+import { useLoaderData, Await, useNavigate } from "react-router-dom";
+export default function Category() {
+  const { results } = useLoaderData();
   const navigate = useNavigate();
   return (
-    <div>
-        <h1>Category</h1>
-<Suspense fallback={<p>Loading data...</p>}>
-<Await resolve={results} errorElement={<p>Error </p>}>
-{(results)=>{
-    return(
-        <div>
-            {results.data.result.map((elem,i)=>{
-               return <div key={i}> 
-                 <h3>{elem.title}</h3>
-                 <p>{elem.description}</p>
-                 <img src={elem.img}/>
-               </div>
-            })}
-            {console.log(results.data.result)}
-        </div>
-    )
-}}
-</Await>
-</Suspense>
-<button  onClick={() => {
-          navigate("/");
-        }}>Home</button>
-        <button  onClick={() => {
-          navigate(-1);
-        }}>Back</button>
+    <div className="cat">
+      <h1>Our Categories</h1>
+      <div >
+        <Suspense fallback={<p>Loading data...</p>}>
+          <Await resolve={results} errorElement={<p>Error </p>}>
+            {(results) => {
+              return (
+                <div className="cat2">
+                  {results.data.result.map((elem, i) => {
+                    return (
+                      <div key={i} className="cat1" onClick={()=>{
+                        navigate(`/${elem.id}`)
+                      }}>
+                        <h2>{elem.title}</h2>
+                       <div className="container"> <Image src={elem.img} className="image"
+                         
+                        />
+                         <p className="description">{elem.description}</p></div>
+                      </div>
+                    );
+                  })}
+                  {console.log(results.data.result)}
+                </div>
+              );
+            }}
+          </Await>
+        </Suspense>
+        <br/><br/>
+      </div>
+      <div className="b1">
+        <Button
+          className="b11"
+          variant="dark"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Home
+        </Button>{' '}
+        <Button
+          className="b11"
+          variant="dark"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </Button>
+      </div>
     </div>
-  )
+  );
 }
-export const allCategory= async()=>{
-  const results= axios.get(`http://localhost:5001/category/`);
-  return {results}
-}
+export const allCategory = async () => {
+  const results = axios.get(`http://localhost:5001/category/`);
+  return { results };
+};
