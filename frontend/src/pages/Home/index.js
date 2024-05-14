@@ -1,8 +1,12 @@
 import React from 'react'
-
+import { useDispatch, useSelector } from 'react-redux';
 const Home = () => {
+
   return (
-    <div>Home</div>
+    <div>
+      <div>Home</div>
+     
+    </div>
   )
 }
 
