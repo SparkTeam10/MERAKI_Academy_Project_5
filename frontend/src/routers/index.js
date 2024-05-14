@@ -8,8 +8,14 @@ import Register from "../pages/Register";
 import Category, { allCategory } from "../pages/categories";
 import CategoryList from "../pages/categoryList";
 import AdminPanel from "../pages/Admin/adminPanel";
+
 import Rate from "../pages/Rate/index"
 // import { allCategory } from "../Service/api/categories";
+
+import Login from "../pages/login";
+import Booking from "../pages/Booking";
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -37,7 +43,7 @@ export const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
-    // loader:getRegister
+    // loader: getRegister
   },
   {
     path: "/:id",
@@ -51,6 +57,15 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPanel />,
   },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/booking",
+    element: <Booking />,
+  },
+
   {
     path: "*",
     element: <NotFound />,
