@@ -9,9 +9,11 @@ const Navbar = () => {
     <NavLink to="help">Help</NavLink>
     <NavLink to="category">Category</NavLink>
     <NavLink to ="register">register</NavLink>
-
+    <NavLink to ="/allserviceprovider">All-Service</NavLink>
+    
    </nav>
   )
 }
 
 export default Navbar
+
