@@ -81,7 +81,7 @@ export default CategoryList;
 
 export const allCategoryList = async () => {
   const results = axios.get(
-    `http://localhost:5001/serviceProvider/category/${id}`
+    `http://localhost:5001/serviceProvider/category/`
   );
   return { results };
 };
