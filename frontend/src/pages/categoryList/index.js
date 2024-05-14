@@ -7,6 +7,7 @@ import "./style.css";
 const CategoryList = () => {
   const navigate = useNavigate();
   let { id } = useParams();
+  console.log(id);
   const [categoryList, setCategoryList] = useState([]);
   const [message, setMessage] = useState("");
   useEffect(() => {

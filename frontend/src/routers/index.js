@@ -8,6 +8,7 @@ import Register from "../pages/Register";
 import Category, { allCategory } from "../pages/categories";
 import CategoryList from "../pages/categoryList";
 import AdminPanel from "../pages/Admin/adminPanel";
+import Rate from "../pages/Rate/index"
 // import { allCategory } from "../Service/api/categories";
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
   {
     path: "/:id",
     element: <CategoryList />,
+  },
+  {
+    path: "/rate",
+    element: <Rate />,
   },
   {
     path: "/admin",
