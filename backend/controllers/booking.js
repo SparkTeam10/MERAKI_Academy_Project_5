@@ -6,7 +6,7 @@ const createBooking = (req, res) => {
   const query = `INSERT INTO booking (user_id , serviceProvider_id, start_date , end_date , price )
     VALUES ($1 , $2, $3, $4 , $5 ) RETURNING * `;
 
-  const data = [user_id, serviceProvider_id, start_date, end_date, price];
+  const data = [user_id, serviceProvider_id, start_date, end_date, price ];
 
   pool
     .query(query, data)
@@ -29,11 +29,11 @@ const createBooking = (req, res) => {
 const updateBookingById = (req, res) => {
   const { id } = req.params;
   console.log(id);
-  const { user_id, serviceProvider_id, start_date, end_date, price } = req.body;
+  const { user_id, serviceProvider_id, start_date, end_date, price , booking_status } = req.body;
 
   const query = ` UPDATE booking SET user_id =COALESCE($1,user_id), serviceProvider_id = COALESCE($2,serviceProvider_id),
     start_date= COALESCE($3,start_date) , end_date= COALESCE($4, end_date),
-    price = COALESCE($5,price) WHERE id = $6 RETURNING * `;
+    price = COALESCE($5,price), booking_status =COALESCE($6,booking_status) WHERE id = $7 RETURNING * `;
 
   const data = [
     user_id || null,
@@ -41,6 +41,7 @@ const updateBookingById = (req, res) => {
     start_date || null,
     end_date || null,
     price || null,
+    booking_status || null ,
     id,
   ];
 
@@ -103,21 +104,23 @@ const ReadAllByUserId = (req, res) => {
 
 const updateByUserId = (req, res)=>{
     const {user_id} = req.params
-    const { serviceProvider_id, start_date, end_date, price } = req.body;
+    const { serviceProvider_id, start_date, end_date, price, booking_status } = req.body;
     
 
     const query = (` UPDATE booking
         SET serviceProvider_id = COALESCE($1, serviceProvider_id),
         start_date = COALESCE($2, start_date),
         end_date = COALESCE($3, end_date),
-        price = COALESCE($4, price)
-        WHERE user_id = $5 AND is_deleted = 0 RETURNING * `)
+        price = COALESCE($4, price),
+        booking_status =COALESCE($5,booking_status)
+        WHERE user_id = $6 AND is_deleted = 0 RETURNING * `)
 
     const data = [
         serviceProvider_id || null,
         start_date || null,
         end_date || null,
         price || null,
+        booking_status || null ,
         user_id ]
 
     pool
