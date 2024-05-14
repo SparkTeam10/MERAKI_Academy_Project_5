@@ -60,7 +60,15 @@ export default function Category() {
         </Button>
       </div>
     </div>
+
+  )
+}
+export const allCategory= async()=>{
+  const results= axios.get(`http://localhost:5001/category/`);
+  return {results}
+
   );
+
 }
 export const allCategory = async () => {
   const results = axios.get(`http://localhost:5001/category/`);
