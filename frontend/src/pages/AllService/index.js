@@ -1,46 +1,64 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useState,useEffect } from "react";
 import axios from "axios";
 import { useLoaderData, Await, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux";
 
-import { setAllService } from '../../Service/redux/reducers/serviceprovider'
+import { setDeleteService ,setAllService} from '../../Service/redux/reducers/serviceprovider'
 
 export default function GetAllService() {
+const dispatch = useDispatch()
+const navigate = useNavigate();
+const {service} =useSelector((state)=>{
+    return {
+        service:state.service.service
+    }
+})
+const allSerivces = async()=>{
+try{
+    const results= await axios.get(`http://localhost:5001/serviceProvider/`);
+    console.log(results)
+    dispatch(setAllService(results.data.result))
+}catch(err){
+console.log(err)
+}
+}
+useEffect(() => {
+   
+    allSerivces()
+}, [])
 
-    const { results } = useLoaderData()
-    // console.log(results)
-    const navigate = useNavigate();
+   
     
 
     return (
         <div>
-            <h1>Service</h1>
-            <Suspense fallback={<p>Loading data...</p>}>
-                <Await resolve={results} errorElement={<p>Error </p>}>
-                    {(results) => {
-                        return (
+            <h1>All Service</h1>
                             <div>
-                                {results.data.result.map((elem, i) => {
+                                {service&&
+                                    
+                                    service.map((elem, i) => {
+                                       
                                     return <div key={i}>
                                         <h3>{elem.title}</h3>
                                         <p>{elem.description}</p>
                                         <h2>{elem.address}</h2>
                                         <img src={elem.img} />
                                         <h1>{elem.price}</h1>
+                                        <button onClick={()=>{
+                                            
+                                            dispatch(setDeleteService(elem.id))
+                                        }}>Delet</button>
                                     </div>
                                 })}
-                                {console.log(results.data.product)}
+                            
                             </div>
-                        )
-
-                    }}
-                </Await>
-            </Suspense>
+            <br></br>
             <button onClick={() => {
                 navigate('/createprovider')
             }}>
             Create Provider</button>
+            
             <button onClick={() => {
                 navigate('/')
             }}>
@@ -53,8 +71,3 @@ export default function GetAllService() {
     )
 };
 
-export const allService= async()=>{
-    const results=  axios.get(`http://localhost:5001/serviceProvider/`);
-
-    return {results}
-  }
