@@ -16,12 +16,12 @@ const rateSlice = createSlice({
     updateRateByUserId: (state, action) => {
       const { user_id } = action.payload;
     },
-    deleteRateByUserId: (state, action) => {
+    /* deleteRateByUserId: (state, action) => {
       const { user_id } = action.payload;
       state.rates = state.rates.filter((elem, i) => {
         user_id !== id;
       });
-    },
+    }, */
   },
 });
 export const {setRate,addRate,updateRateByUserId,deleteRateByUserId}=rateSlice.actions

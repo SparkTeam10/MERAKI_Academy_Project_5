@@ -8,7 +8,7 @@ import Help from "../Layout/Help";
 import NotFound from "../pages/NotFound";
 import Register, { getRegister } from "../pages/Register";
 import Category, { allCategory } from "../pages/categories";
-import GetAllService, { allService } from "../pages/AllService";
+import GetAllService from "../pages/AllService";
 import ServiceProvider from "../pages/ServiceProvider";
 import AdminPanel from "../pages/Admin/adminPanel";
 import Rate from "../pages/Rate/index";
@@ -46,7 +46,7 @@ export const router = createBrowserRouter([
   {
     path: "/allserviceprovider",
     element: <GetAllService />,
-    loader: allService,
+    
   },
   {
     path: "/createprovider",

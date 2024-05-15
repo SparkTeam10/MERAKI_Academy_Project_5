@@ -7,7 +7,7 @@ const serviceProviderSlice = createSlice({
     },
     reducers: {
         setCreatService: (state, action) => {
-            console.log(action.payload);
+           
             state.service.push(action.payload)
         },
         setUpdateService: (state, action) => {
@@ -23,7 +23,7 @@ const serviceProviderSlice = createSlice({
             state.service = action.payload
         },
         setDeleteService: (state, action) => {
-            state.service.filter(elem => elem.id !== action.payload)
+           state.service= state.service.filter(elem => elem.id !== action.payload)
         },
     },
 
