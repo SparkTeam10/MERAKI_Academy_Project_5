@@ -9,6 +9,7 @@ import { setDeleteService, setAllService } from '../../Service/redux/reducers/se
 export default function GetAllService() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const token = useSelector((state) => state.auth.token)
     const { service } = useSelector((state) => {
         return {
             service: state.service.service
@@ -46,7 +47,10 @@ export default function GetAllService() {
                             <img src={elem.img} />
                             <h1>{elem.price}</h1>
                             <button onClick={() => {
-                                axios.delete(`http://localhost:5001/serviceProvider/${elem.id}`)
+                                axios.delete(`http://localhost:5001/serviceProvider/${elem.id}`,
+                                    {
+                                        headers: { Authorization: `Bearer ${token}` }
+                                    });
                                 dispatch(setDeleteService(elem.id))
                             }}>Delet</button>
                         </div>
