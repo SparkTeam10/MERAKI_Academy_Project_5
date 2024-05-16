@@ -12,7 +12,7 @@ export default function Category() {
   return (
     <div className="cat">
       <h1>Our Categories</h1>
-      <div >
+      <div>
         <Suspense fallback={<p>Loading data...</p>}>
           <Await resolve={results} errorElement={<p>Error </p>}>
             {(results) => {
@@ -20,14 +20,19 @@ export default function Category() {
                 <div className="cat2">
                   {results.data.result.map((elem, i) => {
                     return (
-                      <div key={i} className="cat1" onClick={()=>{
-                        navigate(`/${elem.id}`)
-                      }}>
+                      <div
+                        key={i}
+                        className="cat1"
+                        onClick={() => {
+                          navigate(`/${elem.id}`);
+                        }}
+                      >
                         <h2>{elem.title}</h2>
-                       <div className="container"> <Image src={elem.img} className="image"
-                         
-                        />
-                         <p className="description">{elem.description}</p></div>
+                        <div className="container">
+                          {" "}
+                          <Image src={elem.img} className="image" />
+                          <p className="description">{elem.description}</p>
+                        </div>
                       </div>
                     );
                   })}
@@ -37,7 +42,8 @@ export default function Category() {
             }}
           </Await>
         </Suspense>
-        <br/><br/>
+        <br />
+        <br />
       </div>
       <div className="b1">
         <Button
@@ -48,7 +54,7 @@ export default function Category() {
           }}
         >
           Home
-        </Button>{' '}
+        </Button>{" "}
         <Button
           className="b11"
           variant="dark"
@@ -62,6 +68,7 @@ export default function Category() {
     </div>
   );
 }
+
 export const allCategory = async () => {
   const results = axios.get(`http://localhost:5001/category/`);
   return { results };

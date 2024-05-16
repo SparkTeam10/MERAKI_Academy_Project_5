@@ -7,6 +7,7 @@ import "./style.css";
 const CategoryList = () => {
   const navigate = useNavigate();
   let { id } = useParams();
+  console.log(id);
   const [categoryList, setCategoryList] = useState([]);
   const [message, setMessage] = useState("");
   useEffect(() => {
@@ -80,7 +81,7 @@ export default CategoryList;
 
 export const allCategoryList = async () => {
   const results = axios.get(
-    `http://localhost:5001/serviceProvider/category/${id}`
+    `http://localhost:5001/serviceProvider/category/`
   );
   return { results };
 };

@@ -4,9 +4,10 @@ import "./style.css";
 import Swal from "sweetalert2";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
 const AdminPanel = () => {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImNvdW50cnkiOiJqb3JkYW4iLCJyb2xlIjoxLCJpYXQiOjE3MTU2MTIyNjUsImV4cCI6MTcxNTY5ODY2NX0._hNtT5mO53dzuDz5sdwqNUu-CUn_a0VV9O97rAKRN-Y";
+    const token = useSelector(state => state.auth.token)
+    console.log(token);
   const [first, setFirst] = useState("");
   const [error, setError] = useState("");
   const [second, setSecond] = useState([]);
