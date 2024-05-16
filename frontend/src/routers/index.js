@@ -11,16 +11,19 @@ import Category, { allCategory } from "../pages/categories";
 import GetAllService from "../pages/AllService";
 import ServiceProvider from "../pages/ServiceProvider";
 import AdminPanel from "../pages/Admin/adminPanel";
+import Account from "../pages/Account/index";
+
 import Rate from "../pages/Rate/index";
 import CategoryList from "../pages/categoryList"
 // import { allCategory } from "../Service/api/categories";
+
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
     children: [
       {
-        path: "",
+        path: "/home",
         element: <Home />,
       },
       {
@@ -34,15 +37,26 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/account",
+    element : <Account/>,
+  },
+      
+      {
+        path: "/register",
+        element: <Register />,
+        // loader: getRegister
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+
+  {
     path: "/category",
     element: <Category />,
     loader: allCategory,
   },
-  {
-    path: "/register",
-    element: <Register />,
-    // loader:getRegister
-  },
+
   {
     path: "/allserviceprovider",
     element: <GetAllService />,
@@ -52,6 +66,7 @@ export const router = createBrowserRouter([
     path: "/createprovider",
     element: <ServiceProvider />,
   },
+
   {
     path: "/:id",
     element: <CategoryList />,
@@ -64,10 +79,7 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPanel />,
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+ 
   {
     path: "/booking",
     element: <Booking />,

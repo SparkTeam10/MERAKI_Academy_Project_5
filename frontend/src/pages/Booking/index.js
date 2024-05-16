@@ -1,12 +1,25 @@
-import  { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import   React,{ useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  setBooking, 
+  addBooking, 
+  updateBookingById, 
+  updateByUserId , 
+  ReadAllByUserId , 
+  deleteById } from "../../Service/redux/reducers/booking"
+import { useDispatch , useSelector } from "react-redux";
 import axios from "axios";
-import React from "react";
 import Swal from "sweetalert2";
 
 export default function Booking() {
-  //const navigate = useNavigate();
+  
 
+  const dispatch = useDispatch()
+
+
+  // const { serviceProvider_id } = useParams()
+
+  const navigate = useNavigate();
   const [serviceProvider_id, setServiceProvider_id] = useState("");
   const [start_date, setStart_date] = useState("");
   const [end_date, setEnd_date] = useState("");
@@ -21,7 +34,8 @@ export default function Booking() {
       <h3>Booking Confirmation</h3>
       <input
         placeholder="serviceProvider_id"
-        type="text"
+        type="number"
+        value={serviceProvider_id}
         onChange={(e) => {
           setServiceProvider_id(e.target.value);
         }}
@@ -29,7 +43,8 @@ export default function Booking() {
       <br />
       <input
         placeholder="start_date"
-        type="number"
+        type="date"
+        value={start_date}
         onChange={(e) => {
           setStart_date(e.target.value);
         }}
@@ -37,7 +52,8 @@ export default function Booking() {
       <br />
       <input
         placeholder="end_date"
-        type="number"
+        type="date"
+        value={end_date}
         onChange={(e) => {
           setEnd_date(e.target.value);
         }}
@@ -46,6 +62,7 @@ export default function Booking() {
       <input
          placeholder="price"
          type="number"
+         value={price}
          onChange={(e) => {
             setPrice(e.target.value);
          }}
@@ -54,6 +71,7 @@ export default function Booking() {
       <input 
         placeholder="booking_status"
         type="text"
+        value={booking_status}
         onChange={(e) => {
             setBooking_status(e.target.value);
         }}
@@ -61,7 +79,8 @@ export default function Booking() {
       <br />
       <input 
        placeholder="user_id"
-       type="text"
+       type="number"
+       value={user_id}
        onChange={(e) => {
         setUser_id(e.target.value);
        }}
@@ -79,6 +98,8 @@ export default function Booking() {
             user_id
         })
         .then((result)=>{
+          console.log(result);
+          dispatch(addBooking(result.data.booking))
             setSuccess(true)
             setMsg(result.data.message)
             Swal.fire({
@@ -88,18 +109,26 @@ export default function Booking() {
                 showConfirmButton: false,
                 timer: 1500, 
             })
+            // setTimeout(()=>{
+            //   navigate(`/${id}")
+            // },1500)
+            
         })
         .catch((error)=>{
             setSuccess(true)
             setMsg(" Please try agian something went wrong")
             Swal.fire({
                 icon: "error",
-                title : "error",
-                text :" Please try agian something went wrong"
+                title : "Error",
+                text :" Please try agian something, went wrong"
             })
         })
       }}
       >Confirm</button>
+
+      <button onClick={()=>{
+        navigate(-1)
+      }}>BACK</button>
 
 
 
