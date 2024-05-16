@@ -13,6 +13,10 @@ import ServiceProvider from "../pages/ServiceProvider";
 import AdminPanel from "../pages/Admin/adminPanel";
 import Rate from "../pages/Rate/index";
 import CategoryList from "../pages/categoryList"
+import Rated from "../pages/Rated/index";
+// import Rated from "../pages/rated";
+
+
 // import { allCategory } from "../Service/api/categories";
 export const router = createBrowserRouter([
   {
@@ -57,7 +61,7 @@ export const router = createBrowserRouter([
     element: <CategoryList />,
   },
   {
-    path: "/rate",
+    path: "/providerID/:serviceProvider_id",
     element: <Rate />,
   },
   {
@@ -72,7 +76,10 @@ export const router = createBrowserRouter([
     path: "/booking",
     element: <Booking />,
   },
-
+ {
+  path: "/rated",
+  element: <Rated/>
+ },
   {
     path: "*",
     element: <NotFound />,

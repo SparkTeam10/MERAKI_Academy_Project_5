@@ -24,10 +24,9 @@ userRouter.get(
 userRouter.delete(
   "/:id",
   authentication,
-  authorization("delete_category"),
-  deleteUser
+   deleteUser
 );
-userRouter.get('/provider',authentication,authorization("delete_category"),getProvider)
+userRouter.get('/provider',authentication,getProvider)
 userRouter.get('/user/:id',authentication,getUserById)
 userRouter.get("/:userName" ,authentication, getUserByName)
 module.exports = userRouter;
