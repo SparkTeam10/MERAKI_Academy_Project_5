@@ -10,6 +10,7 @@ import CategoryList from "../pages/categoryList";
 import AdminPanel from "../pages/Admin/adminPanel";
 import Login from "../pages/login";
 import Booking from "../pages/Booking";
+import Account from "../pages/Account/index";
 
 export const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
     element: <Main />,
     children: [
       {
-        path: "",
+        path: "/home",
         element: <Home />,
       },
       {
@@ -31,15 +32,26 @@ export const router = createBrowserRouter([
     ],
   },
   {
+    path: "/account",
+    element : <Account/>,
+  },
+      
+      {
+        path: "/register",
+        element: <Register />,
+        // loader: getRegister
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+
+  {
     path: "/category",
     element: <Category />,
     loader: allCategory,
   },
-  {
-    path: "/register",
-    element: <Register />,
-    // loader: getRegister
-  },
+
   {
     path: "/:id",
     element: <CategoryList />,
@@ -48,10 +60,7 @@ export const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPanel />,
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
+ 
   {
     path: "/booking",
     element: <Booking />,

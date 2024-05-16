@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {setLogin,setLogout,setUserId} from "../../Service/redux/reducers/auth"
+import {setLogin,setUserId} from "../../Service/redux/reducers/auth"
 import {  useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -61,7 +61,9 @@ export default function Login(){
                         showConfirmButton: false,
                         timer: 1500,
                       });
-
+                      setTimeout(()=>{
+                        navigate("/")
+                      },1500)
                 })
                 .catch((error)=>{
                     setSuccess(true)
@@ -72,7 +74,7 @@ export default function Login(){
                         text : "The email doesn’t exist or the password you’ve entered is incorrect"
                     })
                 })
-
+                
             }}>login</button>
 
             <br /> 
