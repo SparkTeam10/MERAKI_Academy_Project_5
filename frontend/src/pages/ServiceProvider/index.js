@@ -14,6 +14,7 @@ export default function ServiceProvider() {
     const navigate = useNavigate();
     const token = useSelector((state) => state.auth.token)
 
+
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [address, setAddress] = useState("");
@@ -55,11 +56,14 @@ export default function ServiceProvider() {
                     setPrice(e.target.value)
                 }}
             />
+            <br></br>
+            <br></br>
             <Button variant="warning" onClick={() => {
                 if (!title || !description || !address || !img || !price) {
                     setError("Please fill in all fields.");
                     return;
                 }
+               
                 axios.post(`http://localhost:5001/serviceProvider/`,
                     {
                         title,
@@ -73,9 +77,9 @@ export default function ServiceProvider() {
                         headers: { Authorization: `Bearer ${token}` },
                     }
                 ).then((resulte) => {
+                    console.log(resulte);
                     setStatus(true);
                     setError(resulte.data.message);
-                    console.log(resulte);
                     dispatch(setCreatService(resulte.data.product[0]))
 
                 })
@@ -86,7 +90,7 @@ export default function ServiceProvider() {
                     })
             }}>Create Service</Button>
 
-
+            <br></br>
             <Button
                 onClick={() => {
                     navigate("/");
@@ -94,6 +98,7 @@ export default function ServiceProvider() {
             >
                 Home
             </Button>
+            <br></br>
             <button
                 onClick={() => {
                     navigate(-1);
