@@ -164,7 +164,8 @@ const getServiceProviderByCategory =(req,res)=>{
   const {category_id}=req.params
   console.log(category_id);
   pool
-  .query(`SELECT * FROM service_provider WHERE is_deleted = 0 AND category_id = $1`,[category_id])
+  .query(`SELECT * FROM service_provider  WHERE 
+  service_provider.is_deleted = 0  AND category_id = $1`,[category_id])
 
   .then((result) => {
     if (result.rows.length) {
@@ -188,12 +189,42 @@ const getServiceProviderByCategory =(req,res)=>{
     });
   });
 }
+const getServiceProviderByCategory1 =(req,res)=>{
+  const {category_id}=req.params
+  console.log(category_id);
+  pool
+  .query(`SELECT * FROM service_provider LEFT JOIN rating  ON service_provider.id= rating.serviceprovider_id WHERE 
+  service_provider.is_deleted = 0  AND category_id = $1`,[category_id])
 
+  .then((result) => {
+    if (result.rows.length) {
+      res.status(200).json({
+        success: true,
+        message: `service_provider by category id= ${category_id}`,
+        result: result.rows,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: `There is no service_provider by category with this id`,
+      });
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: `Server error`,
+      error: err.message,
+    });
+  });
+}
 module.exports = {
   createServiceProvider,
   updateServiceProviderById,
   readAllServiceProvider,
   deleteServiceProvider,
   readById,
-  getServiceProviderByCategory
+  getServiceProviderByCategory,
+  getServiceProviderByCategory1
 };

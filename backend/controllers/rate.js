@@ -90,22 +90,85 @@ SELECT * FROM rating WHERE is_deleted = 0
 `
     )
     .then((result) => {
-     if (result.rows.length){
+      if (result.rows.length) {
         res.status(200).json({
-            success: true,
-            message: `All the rates`,
-            result: result.rows,
-          });
-     }
-     else{
+          success: true,
+          message: `All the rates`,
+          result: result.rows,
+        });
+      } else {
         res.status(200).json({
-            success: true,
-            message: `No rates yet`,
-            
-          });
-     }
+          success: true,
+          message: `No rates yet`,
+        });
+      }
     })
     .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server error`,
+        error: err.message,
+      });
+    });
+};
+const myRates = (req, res) => {
+  const { userId } = req.params;
+  console.log(userId);
+  pool
+    .query(
+      `
+SELECT * FROM rating WHERE is_deleted = 0 AND user_id=$1
+`,
+      [userId]
+    )
+    .then((result) => {
+      if (result.rows.length) {
+        res.status(200).json({
+          success: true,
+          message: `All the rates`,
+          result: result.rows,
+        });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: `No rates yet`,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        success: false,
+        message: `Server error`,
+        error: err.message,
+      });
+    });
+};
+const rateJoin = (req, res) => {
+  pool
+  .query(`
+    SELECT * 
+    FROM service_provider  
+    INNER JOIN rating 
+    ON service_provider.id = rating.serviceprovider_id WHERE 
+    service_provider.is_deleted = 0 AND rating.is_deleted = 0
+  `)
+  .then((result) => {
+    if (result.rows.length) {
+      res.status(200).json({
+        success: true,
+        message: `All the rates`,
+        result: result.rows,
+      });
+      } else {
+        res.status(200).json({
+          success: true,
+          message: `No rates yet`,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
       res.status(500).json({
         success: false,
         message: `Server error`,
@@ -118,4 +181,6 @@ module.exports = {
   updateByUserId,
   deleteRateByUser,
   getRates,
+  myRates,
+  rateJoin,
 };
