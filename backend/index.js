@@ -1,7 +1,11 @@
 const express = require("express");
+// const http = require("http");
+// const socketIo = require("socket.io");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
+// const server = http.createServer(app);
+// const io = socketIo(server, { cors: { origin: "*" } });
 const db = require("./models/db");
 const PORT = process.env.PORT || 5001;
 
@@ -37,7 +41,10 @@ app.use("/rate",rateRouter)
 
 
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
-
+// io.on('connection', (socket) => {
+//     console.log(`${socket} is connected`);
+// });
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
 });
+
