@@ -1,0 +1,7 @@
+star-rating {
+    display: flex;
+    direction: rtl; }
+  
+  .star-rating > * {
+    margin-right: 5px; 
+  }

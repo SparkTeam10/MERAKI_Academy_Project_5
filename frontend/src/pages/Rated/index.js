@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect } from 'react'
 import Button from "react-bootstrap/Button";
+import "./style.css"
 import { useDispatch, useSelector } from 'react-redux';
 import {setRateJoined} from "../../Service/redux/reducers/rate"
 import { useNavigate } from 'react-router-dom';
+import StarRating from '../StarRating/StarRating';
 export default function Rated  ()  {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -23,7 +25,7 @@ export default function Rated  ()  {
     <div>
       <div>Rated</div>
      {rateJoined && rateJoined.map((elem,i)=>{
-        return(
+              return(
             <div key={i}>
                 <h3>{elem.title}</h3>
                 <h4>{elem.address}</h4>
@@ -31,7 +33,8 @@ export default function Rated  ()  {
                 <br />
                 <div>
                   <h4>Price: {elem.price}</h4>
-                  <h4>Rate: {elem.rating}</h4>
+                  <h4>Rate: <StarRating rating={elem.rating}/></h4>
+                  
                   <h4>Comments: {elem.comment}</h4>
                 </div>
                 <br /> <br />
