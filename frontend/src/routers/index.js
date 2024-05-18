@@ -16,6 +16,8 @@ import Account from "../pages/Account/index";
 import Rate from "../pages/Rate/index";
 import CategoryList from "../pages/categoryList"
 import Rated from "../pages/Rated/index";
+import Chat from "../pages/chatting/index";
+import Message from "../pages/chatting/message";
 // import Rated from "../pages/rated";
 
 
@@ -91,6 +93,16 @@ export const router = createBrowserRouter([
  {
   path: "/rated",
   element: <Rated/>
+ },
+ {
+  path: "/chat",
+  element: <Chat/>,
+  children:[
+    {
+      path:"/chat",
+element: <Message/>
+    }
+  ]
  },
   {
     path: "*",
