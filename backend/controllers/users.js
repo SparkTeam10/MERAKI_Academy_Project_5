@@ -270,7 +270,28 @@ SELECT * FROM users WHERE is_deleted = 0 AND role_id=3
     });
   });
 }
-
+const getUsers = (req, res) => {
+  pool
+    .query(
+      `
+SELECT * FROM users WHERE is_deleted = 0 
+`
+    )
+    .then((result) => {
+      res.status(200).json({
+        success: true,
+        message: `All the users`,
+        result: result.rows,
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({
+        success: false,
+        message: `Server error`,
+        error: err.message,
+      });
+    });
+};
 module.exports = {
   register,
   registerServiceProvider,
@@ -280,4 +301,5 @@ module.exports = {
   getUserByName,
   getUserById,
   getProvider,
+  getUsers
 };
