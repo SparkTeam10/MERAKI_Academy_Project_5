@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 export const bookingSlice = createSlice({
     name : "booking",
-    initialState : { booking: [] },
+    initialState :  [],
 
     reducers:{
         setBooking : ( state, action )=>{
@@ -20,15 +20,12 @@ export const bookingSlice = createSlice({
             )
         },
         updateByUserId : (state , action)=>{
-            state.booking = state.booking.map((booking)=>{
+            state.booking = state.booking.map((booking)=>
                 booking.user_id === booking.action.payload.user_id ? action.payload : booking
-            })
+            )
         },
 
-        ReadAllByUserId : (state ,action)=>{
-            state.booking = action.payload
 
-        },
 
         deleteById : (state , action)=>{
             state.booking = state.booking.filter((booking) => booking.id !==action.payload)
@@ -41,7 +38,6 @@ export const {
     setBooking, 
     addBooking, 
     updateBookingById, 
-    updateByUserId , 
-    ReadAllByUserId , 
+    updateByUserId ,  
     deleteById } = bookingSlice.actions
 export default bookingSlice.reducer
