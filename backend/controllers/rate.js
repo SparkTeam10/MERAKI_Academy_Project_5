@@ -54,19 +54,19 @@ const updateByUserId = (req, res) => {
     });
 };
 const deleteRateByUser = (req, res) => {
-  const { user_id } = req.params;
+  const {id} = req.params;
   pool
-    .query(`UPDATE rating SET is_deleted = 1 WHERE user_id = $1 RETURNING *`, [
-      user_id,
-    ])
+    .query(`UPDATE rating SET is_deleted = 1 WHERE id = $1 RETURNING *`, [id])
     .then((result) => {
+      
       if (result.rows.length) {
         return res.status(201).json({
           success: true,
           massage: "This rate has been deleted",
           result: result.rows,
         });
-      } else {
+      } 
+      else {
         return res.status(201).json({
           success: true,
           massage: "There is no rate with this id",
