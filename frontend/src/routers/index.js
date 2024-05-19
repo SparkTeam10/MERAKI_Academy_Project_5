@@ -14,6 +14,12 @@ import AdminPanel from "../pages/Admin/adminPanel";
 import Account from "../pages/Account/index";
 import Rate from "../pages/Rate/index";
 import CategoryList from "../pages/categoryList"
+import Rated from "../pages/Rated/index";
+import Chat from "../pages/chatting/index";
+import Message from "../pages/chatting/message";
+// import Rated from "../pages/rated";
+
+
 // import { allCategory } from "../Service/api/categories";
 
 export const router = createBrowserRouter([
@@ -22,7 +28,7 @@ export const router = createBrowserRouter([
     element: <Main />,
     children: [
       {
-        path: "/home",
+        path: "/",
         element: <Home />,
       },
       {
@@ -71,7 +77,7 @@ export const router = createBrowserRouter([
     element: <CategoryList />,
   },
   {
-    path: "/rate",
+    path: "/providerID/:serviceProvider_id",
     element: <Rate />,
   },
   {
@@ -80,10 +86,23 @@ export const router = createBrowserRouter([
   },
  
   {
-    path: "/booking",
+    path: "/booking/book/:serviceProvider_id",
     element: <Booking />,
   },
-
+ {
+  path: "/rated",
+  element: <Rated/>
+ },
+ {
+  path: "/chat",
+  element: <Chat/>,
+  children:[
+    {
+      path:"/chat",
+element: <Message/>
+    }
+  ]
+ },
   {
     path: "*",
     element: <NotFound />,

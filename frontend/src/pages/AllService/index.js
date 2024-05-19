@@ -4,11 +4,17 @@ import { useLoaderData, Await, useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux";
 
-import { setDeleteService, setAllService } from '../../Service/redux/reducers/serviceprovider'
+import { setDeleteService, setAllService, setUpdateService } from '../../Service/redux/reducers/serviceprovider'
 
 export default function GetAllService() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const [title, setTitle] = useState("");
+    const [shwo, setShwo] = useState(false);
+    const [description, setDescription] = useState("");
+    const [address, setAddress] = useState("");
+    const [img, setImg] = useState("");
+    const [price, setPrice] = useState("");
     const token = useSelector((state) => state.auth.token)
     const { service } = useSelector((state) => {
         return {
@@ -50,9 +56,77 @@ export default function GetAllService() {
                                 axios.delete(`http://localhost:5001/serviceProvider/${elem.id}`,
                                     {
                                         headers: { Authorization: `Bearer ${token}` }
-                                    });
-                                dispatch(setDeleteService(elem.id))
+                                    })
+                                    .then((result) => {
+                                       
+                                        dispatch(setDeleteService(result.data.result[0].id))
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                    })
+
                             }}>Delet</button>
+                            <br></br>
+                            <div>
+                                {shwo && (
+                                    <div>
+                                        <input
+                                            placeholder="Title"
+                                            type="text"
+                                            onChange={(e) => setTitle(e.target.value)}
+                                        />
+                                        <input
+                                            placeholder="Description"
+                                            type="text"
+                                            onChange={(e) => setDescription(e.target.value)}
+                                        />
+                                        <input
+                                            placeholder="Address"
+                                            type="text"
+                                            onChange={(e) => setAddress(e.target.value)}
+                                        />
+                                        <input
+                                            placeholder="Image"
+                                            type="text"
+                                            onChange={(e) => setImg(e.target.value)}
+                                        />
+                                        <input
+                                            placeholder="Price"
+                                            type="number"
+                                            onChange={(e) => setPrice(e.target.value)}
+                                        />
+                                    </div>
+                                )}
+                                <button onClick={() => setShwo(true)}>Show Update</button>
+                                <br></br>
+                                <button
+                                    onClick={() => {
+                                        axios
+                                            .put(`http://localhost:5001/serviceProvider/${elem.id}`, { title, description, address, img, price }, {
+                                                headers: { Authorization: `Bearer ${token}` }
+                                            })
+                                            .then((result) => {
+                                                setShwo(false);
+                                                console.log(result);
+                                                dispatch(setUpdateService({
+                                                    title: result.data.result[0].title,
+        
+                                                    description: result.data.result[0].description,
+                                                    address: result.data.result[0].address,
+                                                    img: result.data.result[0].img,
+                                                    price: result.data.result[0].price,
+                                                    id:elem.id
+                                            
+                                                }));
+                                            })
+                                            .catch((error) => {
+                                                console.log(error);
+                                            });
+                                    }}
+                                >
+                                    Update
+                                </button>
+                            </div>
                         </div>
                     })}
 
@@ -62,11 +136,12 @@ export default function GetAllService() {
                 navigate('/createprovider')
             }}>
                 Create Provider</button>
-
+                <br></br>
             <button onClick={() => {
                 navigate('/')
             }}>
                 Home</button>
+                <br></br>
             <button onClick={() => {
                 navigate(-1);
             }}>Back</button>

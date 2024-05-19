@@ -21,6 +21,9 @@ export default function Account() {
             }}>Login</button>
             <br/>
             <button onClick={()=>{
+                navigate("/chat")
+            }}>Chat</button>
+            <button onClick={()=>{
                 navigate("/")
             }}>Home</button>
             <br/>

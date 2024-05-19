@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
+import {setUsers} from "../../Service/redux/reducers/auth"
 const AdminPanel = () => {
     const token = useSelector(state => state.auth.token)
     console.log(token);
@@ -17,6 +18,7 @@ const AdminPanel = () => {
   const [title, setTitle] = useState("");
   const [img, setImg] = useState("");
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   return (
     <div>
       <h1>AdminPanel</h1>
@@ -54,6 +56,7 @@ const AdminPanel = () => {
                 },
               })
               .then((res) => {
+                dispatch(setUsers(res.data.result))
                 setFirst(res.data.result);
                 console.log(res.data.result);
               })

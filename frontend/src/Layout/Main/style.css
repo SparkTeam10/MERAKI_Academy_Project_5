@@ -1,0 +1,28 @@
+.root-layout{
+    display: grid;
+    grid-template-rows: auto 1fr auto ;
+    gap: 10px;
+    padding-left: 1%;
+    padding-right: 1%;
+    background-color: beige;
+}
+.headH{
+    border: 1px solid red;
+    background-color: rgb(88, 88, 245);
+    font-size: larger;
+    color: black;
+    padding-left: 20px;
+   }
+.mainM{
+    border: 1px solid rgb(38, 0, 255);
+    padding-left: 20px;
+}
+.footer{
+       border: 1px solid red;
+       padding-left: 20px;
+}
+.social-icons{
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+   }

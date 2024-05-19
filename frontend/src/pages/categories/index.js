@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
 import "./style.css";
@@ -6,9 +6,25 @@ import Modal from "react-bootstrap/Modal";
 import Image from "react-bootstrap/Image";
 import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import { useLoaderData, Await, useNavigate } from "react-router-dom";
+import { setCategory } from "../../Service/redux/reducers/auth";
+import { useDispatch, useSelector } from "react-redux";
 export default function Category() {
   const { results } = useLoaderData();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  const allCategory = useSelector((state) => state.auth.category);
+  console.log(allCategory);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5001/category/`)
+      .then((result) => {
+        dispatch(setCategory(result.data.result))
+      })
+      .catch((err)=>{
+        console.log(err);
+      });
+  },[dispatch]);
   return (
     <div className="cat">
       <h1>Our Categories</h1>
