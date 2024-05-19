@@ -8,13 +8,18 @@ import { setCreatService } from "../../Service/redux/reducers/serviceprovider"
 
 
 
+
+
 export default function ServiceProvider() {
 
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const token = useSelector((state) => state.auth.token)
 
+    const category = useSelector((state) => state.auth.category)
 
+    const [category_id,setCategory_Id]=useState("");
+    
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [address, setAddress] = useState("");
@@ -22,6 +27,25 @@ export default function ServiceProvider() {
     const [price, setPrice] = useState("");
     const [status, setStatus] = useState("");
     const [error, setError] = useState("");
+
+    const uploadImage = (files) => {
+        const formData = new FormData();
+    
+        formData.append("file", files[0]);
+        formData.append("upload_preset", "gdciwpq7");
+        fetch(
+          "https://api.cloudinary.com/v1_1/diuwwiwqs/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setImg(data.secure_url);
+            
+          });
+      };
 
     return (
         <div>
@@ -44,11 +68,19 @@ export default function ServiceProvider() {
                     setAddress(e.target.value)
                 }}
             />
+
+
             <input
-                placeholder="Image" type="text"
-                onChange={(e) => {
-                    setImg(e.target.value)
-                }}
+                placeholder="Image URL"
+                type="text"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
+            />
+            <input
+                type="file"
+                onChange={(e)=>{
+                    
+                    uploadImage(e.target.files)}}
             />
             <input
                 placeholder="Price" type="number"
@@ -56,6 +88,15 @@ export default function ServiceProvider() {
                     setPrice(e.target.value)
                 }}
             />
+            <select onChange={(e)=>{setCategory_Id(e.target.value)}}>
+            {category && category.map((elm,i)=>{
+                return (
+                    <option key={i} value={elm.id}>
+                    {elm.title}
+                    </option>
+                )
+            })}
+            </select>
             <br></br>
             <br></br>
             <Button variant="warning" onClick={() => {
@@ -63,7 +104,7 @@ export default function ServiceProvider() {
                     setError("Please fill in all fields.");
                     return;
                 }
-               
+
                 axios.post(`http://localhost:5001/serviceProvider/`,
                     {
                         title,
@@ -71,7 +112,8 @@ export default function ServiceProvider() {
                         address,
                         img,
                         price,
-
+                        category_id
+                        
                     },
                     {
                         headers: { Authorization: `Bearer ${token}` },
