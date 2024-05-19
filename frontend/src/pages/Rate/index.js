@@ -12,10 +12,7 @@ import {
 } from "../../Service/redux/reducers/rate";
 import Button from "react-bootstrap/Button";
 const Rate = () => {
-  useEffect(() => {
-    rateFun();
-  }, []);
-  const token = useSelector((state) => state.auth.token);
+   const token = useSelector((state) => state.auth.token);
   const user_id = useSelector((state) => state.auth.userId);
   const rates = useSelector((state) => state.rates.rates);
   const myRate = useSelector((state) => state.rates.myRate);
@@ -26,6 +23,9 @@ const Rate = () => {
   const [userName, setUserName] = useState("");
   const [rating, setRating] = useState("");
   const [comment, setComment] = useState("");
+  useEffect(() => {
+    rateFun();
+  }, [dispatch]);
   const rateFun = () => {
     axios
       .get(`http://localhost:5001/rate/`)
@@ -121,6 +121,7 @@ const Rate = () => {
       {/* <h4>{myRate[0].username}</h4> */}
       {myRate ?
         myRate.map((elem, i) => {
+          console.log(elem.id);
           return (
             <div key={i}>
               <h5>{elem.rating}</h5>
@@ -129,14 +130,15 @@ const Rate = () => {
                 className="delete"
                 onClick={() => {
                   axios
-                    .delete(`http://localhost:5001/rate/${elem.user_id}`, {
+                    .delete(`http://localhost:5001/rate/${elem.id}`, {
                       headers: {
                         Authorization: `Bearer ${token}`,
                       },
                     })
                     .then((result) => {
-                      dispatch(deleteRateByUserId({ user_id: elem.user_id }));
-                      console.log(result);
+                      dispatch(deleteRateByUserId(result.data.result[0].id));
+                      console.log(elem.id);
+                      console.log(result.data);
                     })
                     .catch((err) => {
                       console.log(err);
@@ -151,7 +153,7 @@ const Rate = () => {
       <h3>all rates</h3>
       {rates &&
         rates.map((elem, i) => {
-          console.log(elem.user_id, user_id);
+         
           return (
             <div key={i}>
               <div> {elem.username}</div>

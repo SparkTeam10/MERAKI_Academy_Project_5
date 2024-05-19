@@ -16,7 +16,8 @@ const rateSlice = createSlice({
       state.rates.push(action.payload);
     },
      deleteRateByUserId: (state, action) => {
-      const { user_id } = action.payload; 
+     console.log(action.payload);
+      state.rates= state.rates.filter(elem => elem.id !== action.payload)
       // state.rates = state.rates.filter((elem, i) => {
       //   console.log(user_id,elem.id);
       //   elem.id !== user_id ;

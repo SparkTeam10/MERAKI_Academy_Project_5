@@ -1,6 +1,6 @@
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {setLogin,setUserId} from "../../Service/redux/reducers/auth"
+import {setLogin,setUserId,setLogout} from "../../Service/redux/reducers/auth"
 import {  useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -81,7 +81,14 @@ navigate('/Admin')
             }}>login</button>
 
             <br /> 
-
+            <button
+              className="logout"
+              onClick={() => {
+                dispatch(setLogout(false));
+              }}
+            >
+              Logout
+            </button>
             <button onClick={()=>{
                 navigate("/register")
                 

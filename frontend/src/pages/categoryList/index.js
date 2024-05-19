@@ -15,8 +15,9 @@ const CategoryList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rates = useSelector((state) => state.rates.rates);
+  
   console.log(rates);
-  let { id } = useParams();
+   let { id } = useParams();
   console.log(id);
   const [categoryList, setCategoryList] = useState([]);
   const [message, setMessage] = useState("");
@@ -34,6 +35,7 @@ const CategoryList = () => {
             width: 600,
           });
         } else {
+        
           setCategoryList(result.data.result);
           setMessage(result.data.message);
         }
@@ -54,6 +56,7 @@ const CategoryList = () => {
         console.log(err);
       });
   };
+  
   return (
     <div className="cat">
       <h1>Category service providers</h1>
@@ -84,6 +87,13 @@ const CategoryList = () => {
                   }}
                 >
                   rate me
+                </button>
+                <button
+                  onClick={() => {
+                    navigate(`/booking/book/${ele.id}`);
+                  }}
+                >
+                  book now
                 </button>
               </div>
             );
