@@ -20,6 +20,7 @@ serviceProvidersRouter.post(
   createServiceProvider
 );
 
+/* serviceProvidersRouter.post('/',createServiceProvider) */
 
 serviceProvidersRouter.put(
   "/:id",
@@ -27,6 +28,7 @@ serviceProvidersRouter.put(
   authorization("create_service_provider"),
   updateServiceProviderById
 );
+/* serviceProvidersRouter.put('/:id',updateServiceProviderById) */
 
 serviceProvidersRouter.get("/", readAllServiceProvider);
 
@@ -36,7 +38,9 @@ serviceProvidersRouter.delete(
   authorization("create_service_provider"),
   deleteServiceProvider
 );
-serviceProvidersRouter.get("/:id", readById);
+
+/* serviceProvidersRouter.delete('/:id',deleteServiceProvider); */
+
 
 serviceProvidersRouter.get(
   "/category/:category_id",
