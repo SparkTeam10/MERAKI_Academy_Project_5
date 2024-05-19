@@ -12,7 +12,6 @@ import GetAllService from "../pages/AllService";
 import ServiceProvider from "../pages/ServiceProvider";
 import AdminPanel from "../pages/Admin/adminPanel";
 import Account from "../pages/Account/index";
-
 import Rate from "../pages/Rate/index";
 import CategoryList from "../pages/categoryList"
 import Rated from "../pages/Rated/index";
