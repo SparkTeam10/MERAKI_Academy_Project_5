@@ -55,7 +55,12 @@ const updateBookingById = (req, res) => {
           result: result.rows,
         });
       }
-      throw Error;
+      else{
+        res.status(201).json({
+          success : false,
+          message : `Booking not found`
+        })
+      } 
     })
     .catch((err) => {
       console.log(err);

@@ -75,7 +75,7 @@ export default function Register() {
       /> <br /> 
             <button  onClick={() => {
           axios
-            .post(`http://localhost:5001/users/register`, {
+            .post("http://localhost:5001/users/register", {
               userName,
               age,
               PhoneNumber,
@@ -251,7 +251,7 @@ export default function Register() {
   );
 }
 // export const getRegister = async () => {
-//   const results = axios.post(`http://localhost:5001/users/register`, {
+//   const results = axios.post(http://localhost:5001/users/register, {
 //     userName,
 //     age,
 //     PhoneNumber,
