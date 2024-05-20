@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./style.css";
 import Swal from "sweetalert2";
-import Button from "react-bootstrap/Button";
+import { Button , HStack,FormControl,
+  FormLabel,
+  Input,
+  Stack,Center} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import {setUsers} from "../../Service/redux/reducers/auth"
@@ -23,7 +26,7 @@ const AdminPanel = () => {
     <div>
       <h1>AdminPanel</h1>
       <div className="h">
-        <button
+        <Button 
           onClick={() => {
             setShowInput(false);
             setSecond([]);
@@ -44,8 +47,8 @@ const AdminPanel = () => {
         >
           {" "}
           Users
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             setShowInput(false);
             setSecond([]);
@@ -66,8 +69,8 @@ const AdminPanel = () => {
           }}
         >
           Service Providers
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             setFirst([]);
             setShowInput(true);
@@ -83,8 +86,8 @@ const AdminPanel = () => {
           }}
         >
           all categories
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => {
             setShowInput(true)
             axios
@@ -108,7 +111,7 @@ const AdminPanel = () => {
         >
           {" "}
           Add new Category
-        </button>
+        </Button>
       </div>
       {first.length && (
         <div className="user">
@@ -121,8 +124,10 @@ const AdminPanel = () => {
                 <h3>{elem.age}</h3>
                 <h3>{elem.phonenumber}</h3>
                 <img src={elem.image} />
-                <button
+                <Button
+                bg="red"
                   className="delete"
+                  color="white"
                   onClick={() => {
                     axios
                       .delete(`http://localhost:5001/users/${elem.id}`, {
@@ -143,7 +148,7 @@ const AdminPanel = () => {
                   }}
                 >
                   X
-                </button>
+                </Button>
               </div>
             );
           })}
@@ -157,8 +162,9 @@ const AdminPanel = () => {
                 <h2>{elem.title}</h2>
                 <h3>{elem.description}</h3>
                 <img src={elem.img} />
-                <button
+                <Button bg="red"
                   className="delete"
+                  color="white"
                   onClick={() => {
                     axios
                       .delete(`http://localhost:5001/category/${elem.id}`, {
@@ -179,8 +185,9 @@ const AdminPanel = () => {
                   }}
                 >
                   X
-                </button>
-                <button
+                </Button>
+                <Button bg="navy"
+                color="white"
                   onClick={() => {
                     axios
                       .put(
@@ -208,59 +215,99 @@ const AdminPanel = () => {
                   }}
                 >
                   Update
-                </button>
+                </Button>
               </div>
             );
           })}
         </div>
       )}
       {showInput && (
-        <div>
-          <input
-            type="text"
-            placeholder=" title"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder=" description"
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          />
-          <br />
-          <input
-            type="text"
-            placeholder="image"
-            onChange={(e) => {
-              setImg(e.target.value);
-            }}
-          />
-        </div>
+        <Center>
+        <Stack spacing={4} m={4}>
+          <FormControl id="title">
+            <FormLabel>Title</FormLabel>
+            <Input
+              type="text"
+              placeholder="Enter title"
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+            />
+          </FormControl>
+          <FormControl id="description">
+            <FormLabel>Description</FormLabel>
+            <Input
+              type="text"
+              placeholder="Enter description"
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            />
+          </FormControl>
+          <FormControl id="image">
+            <FormLabel>Image URL</FormLabel>
+            <Input
+              type="text"
+              placeholder="Enter image URL"
+              onChange={(e) => {
+                setImg(e.target.value);
+              }}
+            />
+          </FormControl>
+        </Stack>
+      </Center>
+        // <div>
+        //   <input
+        //     type="text"
+        //     placeholder=" title"
+        //     onChange={(e) => {
+        //       setTitle(e.target.value);
+        //     }}
+        //   />
+        //   <br />
+        //   <input
+        //     type="text"
+        //     placeholder=" description"
+        //     onChange={(e) => {
+        //       setDescription(e.target.value);
+        //     }}
+        //   />
+        //   <br />
+        //   <input
+        //     type="text"
+        //     placeholder="image"
+        //     onChange={(e) => {
+        //       setImg(e.target.value);
+        //     }}
+        //   />
+        // </div>
       )}
-      <div className="b1">
+    <HStack spacing={8} className="b1">
         <Button
-          className="b11"
-          variant="dark"
+          variant="outline"
+          colorScheme="teal"
+          bg="navy"
+          color="white"
+          borderColor="navy"
           onClick={() => {
             navigate("/");
           }}
         >
           Home
-        </Button>{' '}
+        </Button>
         <Button
-          className="b11"
-          variant="dark"
+          variant="outline"
+          colorScheme="teal"
+          bg="navy"
+          color="white"
+          borderColor="navy"
           onClick={() => {
             navigate(-1);
           }}
         >
           Back
         </Button>
-      </div>
+      </HStack>
     </div>
   );
 };
