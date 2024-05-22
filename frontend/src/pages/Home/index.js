@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Box, IconButton, Image, Flex, Icon } from "@chakra-ui/react";
+import {
+  Box,
+  IconButton,
+  Image,
+  Flex,
+  Icon,
+  Heading,
+  Text,
+} from "@chakra-ui/react";
 const Home = () => {
   const images = [
     "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWxzfGVufDB8fDB8fHww",
@@ -20,6 +28,12 @@ const Home = () => {
 
   return (
     <Box className="slider" position="relative">
+      <Heading as="h1" size="xl" mb={5} textAlign="center">
+        Welcome to Book and{" "}
+        <Text as="span" color="teal.500">
+          Go
+        </Text>
+      </Heading>
       <Flex justify="center" align="center" height="500px">
         {images.map((elem, i) => (
           <Box

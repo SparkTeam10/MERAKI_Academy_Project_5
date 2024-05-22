@@ -13,6 +13,7 @@ import {
   HStack
 } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from 'axios';
 const Chat = () => {
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
@@ -20,9 +21,10 @@ const Chat = () => {
   const [isConnected, setIsConnected] = useState(false)
  
   // const [token, setToken] = useState(false)
-  // const [user_id, setUser_id] = useState(false)
+  // const [user, setUser] = useState("")
   console.log(token,'user',user_id);
   const [socket, setSocket] = useState(null);
+
   useEffect(() => {
     // add a an event listener on message events
     socket?.on("connect", () => {
@@ -32,7 +34,7 @@ const Chat = () => {
       console.log(error.message);
       setIsConnected(false);
      });
-   
+     
      return ()=>{
       socket?.close()
       socket?.removeAllListeners();
@@ -50,8 +52,9 @@ const Chat = () => {
           setSocket(socketInit({ user_id, token }));
         }}
       >
-        Connect to Chat
+        Start Chatting
       </Button>
+      
       {socket && <Message socket={socket} />}
       
     </Flex>
