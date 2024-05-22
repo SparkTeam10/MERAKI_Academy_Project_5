@@ -219,6 +219,8 @@ const getServiceProviderByCategory1 =(req,res)=>{
     });
   });
 }
+
+
 module.exports = {
   createServiceProvider,
   updateServiceProviderById,
@@ -226,5 +228,6 @@ module.exports = {
   deleteServiceProvider,
   readById,
   getServiceProviderByCategory,
-  getServiceProviderByCategory1
+  getServiceProviderByCategory1,
+ 
 };

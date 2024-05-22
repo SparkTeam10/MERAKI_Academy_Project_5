@@ -17,6 +17,8 @@ import CategoryList from "../pages/categoryList"
 import Rated from "../pages/Rated/index";
 import Chat from "../pages/chatting/index";
 import Message from "../pages/chatting/message";
+import Flow from "../pages/FLOW/Flow";
+import My from "../pages/Myaccount/My";
 // import Rated from "../pages/rated";
 
 
@@ -38,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: "help",
         element: <Help />,
+      },
+      {
+        path: "/",
+        element: <Flow />,
       },
     ],
   },
@@ -74,7 +80,7 @@ export const router = createBrowserRouter([
 
   {
     path: "/:id",
-    element: <CategoryList />,
+    element: <CategoryList/>,
   },
   {
     path: "/providerID/:serviceProvider_id",
@@ -102,6 +108,10 @@ export const router = createBrowserRouter([
 element: <Message/>
     }
   ]
+ },
+ {
+  path:"/myOwnAccount",
+  element: <My/>
  },
   {
     path: "*",
