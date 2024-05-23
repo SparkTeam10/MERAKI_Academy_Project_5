@@ -14,11 +14,11 @@ bookingRouter.post("/",authentication, createBooking)
 
 bookingRouter.put("/:id",authentication , authorization("create_category"),updateBookingById)
 
-bookingRouter.put("/update/:user_id" ,authentication, updateByUserId)
+
+bookingRouter.get("/:serviceProviderId/:userId", authentication, ReadAllByUserId);
 
 
-
-bookingRouter.get("/:user_id" ,authentication , ReadAllByUserId )
+// bookingRouter.get("/:user_id" ,authentication , ReadAllByUserId )
 
 bookingRouter.delete("/:id" ,authentication , deleteById)
 
