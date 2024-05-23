@@ -1,13 +1,15 @@
 import React, { Suspense, useEffect } from "react";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 import "./style.css";
-import Modal from "react-bootstrap/Modal";
-import Image from "react-bootstrap/Image";
-import { Container, Row, Col, ListGroup } from "react-bootstrap";
+// import Image from "react-bootstrap/Image";
+// import { Container, Row, Col, ListGroup } from "react-bootstrap";
 import { useLoaderData, Await, useNavigate } from "react-router-dom";
 import { setCategory } from "../../Service/redux/reducers/auth";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Container, Image, Text, VStack,Spinner ,HStack } from "@chakra-ui/react";
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
+
 export default function Category() {
   const { results } = useLoaderData();
   const navigate = useNavigate();
@@ -19,69 +21,73 @@ export default function Category() {
     axios
       .get(`http://localhost:5001/category/`)
       .then((result) => {
-        dispatch(setCategory(result.data.result))
+        dispatch(setCategory(result.data.result));
       })
-      .catch((err)=>{
+      .catch((err) => {
         console.log(err);
       });
-  },[dispatch]);
+  }, [dispatch]);
   return (
-    <div className="cat">
-      <h1>Our Categories</h1>
-      <div>
-        <Suspense fallback={<p>Loading data...</p>}>
-          <Await resolve={results} errorElement={<p>Error </p>}>
-            {(results) => {
-              return (
-                <div className="cat2">
-                  {results.data.result.map((elem, i) => {
-                    return (
-                      <div
-                        key={i}
-                        className="cat1"
-                        onClick={() => {
-                          navigate(`/${elem.id}`);
-                        }}
-                      >
-                        <h2>{elem.title}</h2>
-                        <div className="container">
-                          {" "}
-                          <Image src={elem.img} className="image" />
-                          <p className="description">{elem.description}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                  {console.log(results.data.result)}
-                </div>
-              );
-            }}
-          </Await>
-        </Suspense>
-        <br />
-        <br />
-      </div>
-      <div className="b1">
+    <VStack spacing={8} align="center" p={4}>
+      <Text fontSize="2xl" fontWeight="bold">Our Categories</Text>
+      <Suspense fallback={<Spinner size="xl" color="teal.500" />}>
+        {" "}
+        <Await resolve={results} errorElement={<p>Error </p>}>
+          {(results) => {
+            return (
+              <div className="cat2">
+                {results.data.result.map((elem, i) => {
+                  return (
+                    <div
+                      key={i}
+                      className="cat1"
+                      onClick={() => {
+                        navigate(`/${elem.id}`);
+                      }}
+                      style={{
+                        border: "2px solid #CBD5E0",
+                        borderRadius: "5%",
+                        boxShadow: "5px 5px 5px teal",
+                        transition: "transform 0.3s",
+                        _hover: { transform: "scale(1.05)" }
+                      }}
+                    >
+                     <Text fontSize="xl" fontWeight="bold">{elem.title}</Text>
+                     <Container centerContent className="container">
+                <Image src={elem.img} className="image" style={{borderRadius: "5%",boxShadow: "2px 2px 2px teal"}}/>
+                <Text className="description">{elem.description}</Text>
+              </Container>
+                    </div>
+                  );
+                })}
+                {console.log(results.data.result)}
+              </div>
+            );
+          }}
+        </Await>
+      </Suspense>
+      <HStack spacing={8} className="navigation-buttons">
         <Button
-          className="b11"
-          variant="dark"
+          colorScheme="yellow"
+          leftIcon={<FaHome />}
           onClick={() => {
             navigate("/");
           }}
         >
           Home
-        </Button>{" "}
+        </Button>
         <Button
-          className="b11"
-          variant="dark"
+          colorScheme="yellow"
+          leftIcon={<FaArrowLeft />}
           onClick={() => {
             navigate(-1);
           }}
         >
           Back
         </Button>
-      </div>
-    </div>
+      </HStack>
+    </VStack>
+ 
   );
 }
 
