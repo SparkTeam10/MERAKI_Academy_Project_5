@@ -21,6 +21,8 @@ import {
   Heading,
   Container
 } from "@chakra-ui/react";
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
+
 const Rate = () => {
   const token = useSelector((state) => state.auth.token);
   const user_id = useSelector((state) => state.auth.userId);
@@ -194,32 +196,26 @@ const Rate = () => {
           </Box>
         ))} */}
 
-        <HStack spacing={8} className="b1">
-          <Button
-            variant="outline"
-            colorScheme="teal"
-            bg="navy"
-            color="white"
-            borderColor="navy"
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Home
-          </Button>
-          <Button
-            variant="outline"
-            colorScheme="teal"
-            bg="navy"
-            color="white"
-            borderColor="navy"
-            onClick={() => {
-              navigate(-1);
-            }}
-          >
-            Back
-          </Button>
-        </HStack>
+<HStack spacing={8} className="navigation-buttons">
+        <Button
+          colorScheme="yellow"
+          leftIcon={<FaHome />}
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Home
+        </Button>
+        <Button
+          colorScheme="yellow"
+          leftIcon={<FaArrowLeft />}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </Button>
+      </HStack>
       </VStack>
     </Container>
   );

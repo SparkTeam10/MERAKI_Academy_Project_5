@@ -12,6 +12,8 @@ import {
   Container,
   Stack,
 } from '@chakra-ui/react';
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
+
 import "./style.css"
 import { useDispatch, useSelector } from 'react-redux';
 import {setRateJoined} from "../../Service/redux/reducers/rate"
@@ -71,13 +73,10 @@ export default function Rated  ()  {
             </Box>
           ))}
       </SimpleGrid>
-      <HStack spacing={8} className="b1">
+      <HStack spacing={8} className="navigation-buttons">
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaHome />}
           onClick={() => {
             navigate("/");
           }}
@@ -85,11 +84,8 @@ export default function Rated  ()  {
           Home
         </Button>
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaArrowLeft />}
           onClick={() => {
             navigate(-1);
           }}

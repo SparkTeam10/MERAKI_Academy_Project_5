@@ -9,6 +9,7 @@ import { Button , HStack,FormControl,
 import { useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import {setUsers} from "../../Service/redux/reducers/auth"
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa";
 const AdminPanel = () => {
     const token = useSelector(state => state.auth.token)
     console.log(token);
@@ -282,13 +283,10 @@ const AdminPanel = () => {
         //   />
         // </div>
       )}
-    <HStack spacing={8} className="b1">
+    <HStack spacing={8} className="navigation-buttons">
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaHome />}
           onClick={() => {
             navigate("/");
           }}
@@ -296,11 +294,8 @@ const AdminPanel = () => {
           Home
         </Button>
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaArrowLeft />}
           onClick={() => {
             navigate(-1);
           }}
