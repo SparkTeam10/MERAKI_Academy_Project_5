@@ -33,7 +33,7 @@ const Navbar = () => {
         {/* <Image src={logo} alt="Spark Logo" boxSize="50px" mr={4} /> */}
         <Text as="h1" fontSize="xl" fontWeight="bold" color="white">
         Book&
-            <Text as="span" color="teal.300">
+            <Text as="span" color="yellow">
               Go
             </Text>
           </Text>
@@ -56,9 +56,9 @@ const Navbar = () => {
                 handleSearch();
               }
             }}
-            bg="teal.400"
-            _hover={{ bg: "teal.100" }}
-            color="white"
+            bg="yellow"
+            _hover={{ bg: "#F2CE4E" }}
+            color="black"
           />
           
         </InputRightElement>
