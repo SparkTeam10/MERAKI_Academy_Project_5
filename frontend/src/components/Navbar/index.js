@@ -13,7 +13,7 @@ const Navbar = () => {
       <NavLink to="help"> Help </NavLink>
       <NavLink to="category"> Category </NavLink>
       <NavLink to="/allserviceprovider"> All-Service </NavLink>
-      <NavLink to="Booking"> Booking </NavLink>
+      <NavLink to="/booking/book/:serviceProvider_id"> Booking </NavLink>
      <NavLink to = "Account"> Account </NavLink>
     </nav>
   );

@@ -15,6 +15,7 @@ const CategoryList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rates = useSelector((state) => state.rates.rates);
+  const userId = useSelector((state) => state.auth.userId);
   
   console.log(rates);
    let { id } = useParams();
@@ -56,6 +57,8 @@ const CategoryList = () => {
         console.log(err);
       });
   };
+
+ 
   
   return (
     <div className="cat">
@@ -86,11 +89,13 @@ const CategoryList = () => {
                     navigate(`/providerID/${ele.id}`);
                   }}
                 >
-                  rate me
+                  Rate me
                 </button>
                 <button
                   onClick={() => {
-                    navigate(`/booking/book/${ele.id}`);
+                    navigate(`/booking/${ele.id}/${userId}/${ele.price}`);
+                    
+                  
                   }}
                 >
                   book now

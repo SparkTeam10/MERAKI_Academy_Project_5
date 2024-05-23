@@ -4,8 +4,15 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import "./style.css"
 import Swal from "sweetalert2";
+import { useSelector , useDispatch } from "react-redux";
+
+
 export default function Register() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+ 
+
   //   const {results}=useLoaderData()
   const [userName, setUserName] = useState("");
   const [country, setCountry] = useState("");
@@ -17,6 +24,14 @@ export default function Register() {
   const [status, setStatus] = useState(false);
   // const [message, setMessage] = useState("");
   const [password, setPassword] = useState("");
+
+
+
+
+
+
+
+
   return (
     <div className="main">
         <h3>Register Now and Join Us</h3>
@@ -148,6 +163,11 @@ export default function Register() {
   <span class="now">Register</span>
   <span class="play">User</span>
 </button> <br/>
+
+
+
+
+<br/>
 <button  onClick={() => {
           axios
             .post(`http://localhost:5001/users/ServiceProvider`, {
@@ -224,7 +244,6 @@ export default function Register() {
   <span class="play">Service Provider</span>
 </button>
     </div>
-
     
       <br />
       <div className="b1">
@@ -244,21 +263,10 @@ export default function Register() {
         >
           Back
         </Button>
+       
       </div>
 
 
     </div>
   );
 }
-// export const getRegister = async () => {
-//   const results = axios.post(http://localhost:5001/users/register, {
-//     userName,
-//     age,
-//     PhoneNumber,
-//     email,
-//     password,
-//     country,
-//     image,
-//   });
-//   return { results };
-// };

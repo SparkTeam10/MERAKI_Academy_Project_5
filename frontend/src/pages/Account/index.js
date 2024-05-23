@@ -11,6 +11,7 @@ export default function Account() {
   return (
     <div className='Account'>
      
+     
 
         <button onClick={()=>{
                 navigate("/register")
