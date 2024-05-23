@@ -1,0 +1,11 @@
+star-rating {
+    display: flex;
+    direction: rtl; }
+  .star-rating{
+    display: flex;
+    align-items: center;
+  }
+  .star-rating > * {
+    margin-right: 5px; 
+    
+  }

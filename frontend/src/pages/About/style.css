@@ -1,0 +1,20 @@
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+  .about-container section {
+    margin-bottom: 30px;
+  }
+  
+  .about-container h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .about-container p {
+    font-size: 16px;
+    line-height: 1.5;
+  }

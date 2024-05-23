@@ -2,21 +2,51 @@ const express = require("express");
 
 const serviceProvidersRouter = express.Router();
 
-const { createServiceProvider,
-    updateServiceProviderById,
-    readAllServiceProvider,
-    deleteServiceProvider }
-    = require("../controllers/service_provider")
+const {
+  createServiceProvider,
+  updateServiceProviderById,
+  readAllServiceProvider,
+  deleteServiceProvider,
+  readById,
+  getServiceProviderByCategory,
+  readAllServiceProvider1
+} = require("../controllers/service_provider");
 const authentication = require("../middleware/authentication");
 const authorization = require("../middleware/authorization");
 
-serviceProvidersRouter.post('/',authentication,authorization("create_service_provider"), createServiceProvider)
+serviceProvidersRouter.post(
+  "/",
+  authentication,
+  authorization("create_service_provider"),
+  createServiceProvider
+);
 
-serviceProvidersRouter.put('/:id',authentication,authorization("create_service_provider"),  updateServiceProviderById)
+/* serviceProvidersRouter.post('/',createServiceProvider) */
 
-serviceProvidersRouter.get('/', readAllServiceProvider)
+serviceProvidersRouter.put(
+  "/:id",
+  authentication,
+  authorization("create_service_provider"),
+  updateServiceProviderById
+);
+/* serviceProvidersRouter.put('/:id',updateServiceProviderById) */
 
-serviceProvidersRouter.delete('/:id',authentication,authorization("create_service_provider"),  deleteServiceProvider) 
+serviceProvidersRouter.get("/", readAllServiceProvider);
 
+
+serviceProvidersRouter.delete(
+  "/:id",
+  authentication,
+  authorization("create_service_provider"),
+  deleteServiceProvider
+);
+
+/* serviceProvidersRouter.delete('/:id',deleteServiceProvider); */
+
+
+serviceProvidersRouter.get(
+  "/category/:category_id",
+  getServiceProviderByCategory
+);
 
 module.exports = serviceProvidersRouter;
