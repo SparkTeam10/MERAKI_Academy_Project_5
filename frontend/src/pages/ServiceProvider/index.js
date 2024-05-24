@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { setCreatService } from "../../Service/redux/reducers/serviceprovider"
 
-
+import  "./style.css"
 
 
 
@@ -19,7 +19,6 @@ export default function ServiceProvider() {
     const category = useSelector((state) => state.auth.category)
 
     const [category_id,setCategory_Id]=useState("");
-    
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [address, setAddress] = useState("");
@@ -48,7 +47,8 @@ export default function ServiceProvider() {
       };
 
     return (
-        <div>
+        <div className="wrapper">
+        <div className="con">
             <input
                 placeholder="Title"
                 type="text"
@@ -68,19 +68,17 @@ export default function ServiceProvider() {
                     setAddress(e.target.value)
                 }}
             />
-
-
-            <input
-                placeholder="Image URL"
-                type="text"
-                value={img}
-                onChange={(e) => setImg(e.target.value)}
-            />
             <input
                 type="file"
                 onChange={(e)=>{
                     
                     uploadImage(e.target.files)}}
+            />
+            <input
+                placeholder="Image URL"
+                type="text"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
             />
             <input
                 placeholder="Price" type="number"
@@ -130,11 +128,12 @@ export default function ServiceProvider() {
                         setStatus(false);
                         setError(error.message);
                     })
-            }}>Create Service</Button>
-
+            }}>Create Service
+            </Button>
+            {status && <p className="success">Service created successfully!</p>}
+            {error && <p className="error">{error}</p>}
             <br></br>
-            <Button
-                onClick={() => {
+            <Button onClick={() => {
                     navigate("/");
                 }}
             >
@@ -149,7 +148,9 @@ export default function ServiceProvider() {
                 Back
             </button>
         </div>
+    </div>
     )
 };
+
 
 

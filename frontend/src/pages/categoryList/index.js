@@ -20,7 +20,9 @@ import {
   HStack,
   Container,
 } from "@chakra-ui/react";
+
 import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa";
+
 const CategoryList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
