@@ -23,9 +23,9 @@ export default function Login(){
     const [msg, setMsg] = useState("");
     const [success, setSuccess] = useState(false);
 
-if(email==="admin@yahoo.com" && password==="111"){
-navigate('/Admin')
-}
+// if(email==="admin@yahoo.com" && password==="111"){
+// navigate('/Admin')
+// }
     return(
         <div className="login">
             <h3>Welcome to your favorite booking website</h3>

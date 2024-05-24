@@ -3,6 +3,8 @@ import React, { useEffect,useState } from "react";
 import { useSelector } from "react-redux";
 import { Box, Text, Image, Grid, GridItem, VStack, Heading, Container,Button,HStack } from "@chakra-ui/react";
 import { useNavigate } from 'react-router-dom';
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
+
 const My = () => {
     const navigate=useNavigate()
   const token = useSelector((state) => state.auth.token);
@@ -50,13 +52,11 @@ const My = () => {
           </React.Fragment>
         ))}
       </Grid>
+    
       <HStack spacing={8} className="b1"justify="center" mt={8}>
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaHome />}
           onClick={() => {
             navigate("/");
           }}
@@ -64,11 +64,8 @@ const My = () => {
           Home
         </Button>
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaArrowLeft />}
           onClick={() => {
             navigate(-1);
           }}
