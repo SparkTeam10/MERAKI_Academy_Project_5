@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit"
 
 export const bookingSlice = createSlice({
     name : "booking",
-    initialState :  [],
+    initialState :   { booking: [] },
 
     reducers:{
         setBooking : ( state, action )=>{
@@ -13,6 +13,7 @@ export const bookingSlice = createSlice({
         addBooking : (state , action)=>{
             state.booking.push(action.payload)
         },
+      
 
         updateBookingById :(state , action)=>{
             state.booking =state.booking.map((booking)=>

@@ -64,8 +64,8 @@ const Message = ({ socket }) => {
       mb={4}
     >
       {users.map((user) => (
-        <option key={user.id} value={user.id}>
-          {user.username}
+        <option key={user.id} value={user.id} data-extra={user.username}>
+         {user.id} {user.username}
         </option>
       ))}
     </Select>

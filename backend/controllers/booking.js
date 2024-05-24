@@ -56,7 +56,7 @@ const updateBookingById = (req, res) => {
         });
       }
       else{
-        res.status(201).json({
+        res.status(409).json({
           success : false,
           message : `Booking not found`
         })
@@ -88,7 +88,7 @@ const ReadAllByUserId = (req, res) => {
           result: result.rows,
         });
       }else{
-        res.status(201).json({
+        res.status(400).json({
             success: false,
             message: `There is no booking for this user yet`,
             
@@ -138,7 +138,7 @@ const updateByUserId = (req, res)=>{
                 result : result.rows
             })
         }else{
-            res.status(201).json({
+            res.status(409).json({
                 success : false , 
                 message : `There is no booking for this user_id yet`,
                 result : result.rows
@@ -174,7 +174,7 @@ const deleteById = (req,res)=>{
                 result : result.rows
             })
         }else{
-            res.status(201).json({
+            res.status(409).json({
                 success : false , 
                 message : ` There is no booking `,
                 result : result.rows

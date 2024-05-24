@@ -8,6 +8,8 @@ import { useLoaderData, Await, useNavigate } from "react-router-dom";
 import { setCategory } from "../../Service/redux/reducers/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Image, Text, VStack,Spinner ,HStack } from "@chakra-ui/react";
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
+
 export default function Category() {
   const { results } = useLoaderData();
   const navigate = useNavigate();
@@ -64,13 +66,10 @@ export default function Category() {
           }}
         </Await>
       </Suspense>
-      <HStack spacing={8} className="b1">
+      <HStack spacing={8} className="navigation-buttons">
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaHome />}
           onClick={() => {
             navigate("/");
           }}
@@ -78,11 +77,8 @@ export default function Category() {
           Home
         </Button>
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaArrowLeft />}
           onClick={() => {
             navigate(-1);
           }}
@@ -99,3 +95,6 @@ export const allCategory = async () => {
   const results = axios.get(`http://localhost:5001/category/`);
   return { results };
 };
+
+
+
