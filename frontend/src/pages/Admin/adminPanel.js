@@ -24,7 +24,7 @@ const AdminPanel = () => {
   const navigate = useNavigate();
   const dispatch=useDispatch()
   return (
-    <div>
+    <div className="hh">
       <h1>AdminPanel</h1>
       <div className="h">
         <Button 
