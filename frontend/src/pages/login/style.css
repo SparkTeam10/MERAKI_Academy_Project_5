@@ -1,0 +1,81 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('https://res.cloudinary.com/diuwwiwqs/image/upload/v1716273188/spark/tlmwikq3ecxfzs6bn9rg.jpg');
+  background-size: cover;
+  border: 5px blue solid;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px white solid;
+  background-image: url("");
+  padding: 20px;
+  border-radius: 15px;
+  background-color: rgba(192, 192, 192, 0.5); /* اللون السكني مع شفافية 50% */
+}
+
+.text h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.text input {
+  width: 300px;
+  height: 40px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  border: 3px black solid;
+}
+
+.text button {
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+  background-color: blue;
+  color: #f2ebeb;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: center; 
+  border-radius: 9px;
+  border: 3px black solid;
+}
+
+.text button:hover {
+  background-color: #0056b3;
+}
+
+.text .logout,
+.text .register,
+.text .home,
+.text .back {
+  margin-top: 20px;
+  color: #fff;
+  cursor: pointer;
+  text-decoration: underline;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.text .logout:hover,
+.text .register:hover,
+.text .home:hover,
+.text .back:hover {
+  color: #f0f0f0;
+}
+
+.text .texth3 {
+    color: black;
+    font-weight: bold;
+}

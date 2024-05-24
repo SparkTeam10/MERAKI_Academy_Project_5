@@ -20,6 +20,7 @@ import {
   HStack,
   Container,
 } from "@chakra-ui/react";
+
 const CategoryList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
