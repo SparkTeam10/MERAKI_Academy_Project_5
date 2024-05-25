@@ -27,6 +27,7 @@ const CategoryList = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const rates = useSelector((state) => state.rates.rates);
+  const userId =useSelector((state) => state.auth.userId);
 
   console.log(rates);
   let { id } = useParams();
@@ -111,7 +112,8 @@ const CategoryList = () => {
                   <Button
                     colorScheme="blue"
                     variant="outline"
-                    onClick={() => navigate(`/booking/book/${elem.id}`)}
+                    onClick={() => navigate(`/booking/${elem.id}/${userId}/${elem.price}`)} 
+                    
                   >
                     Book Now
                   </Button>

@@ -1,14 +1,34 @@
 import { NavLink } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {setLogin,setUserId,setLogout} from "../../Service/redux/reducers/auth"
 import { HStack, Button, Text } from "@chakra-ui/react";
-import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa";
+import Swal from 'sweetalert2'; 
 import "./style.css";
-import { useDispatch } from "react-redux";
+
 export default function Account() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const user_id =useSelector((state) => state.auth.userId);
+  const token = useSelector((state) => state.auth.token);
+
+
+  const handleMyBooking = () => {
+    if (!token) {
+      Swal.fire({
+        icon: "error",
+        title: "You are not logged in",
+        text: "Please log in to view your bookings.",
+      });
+      navigate("/login");
+    } else {
+      navigate(`/mybooking/${user_id}`);
+    }
+  };
+
+
+
   return (
     <div>
       <HStack spacing={8} className="b1"justify="center" mt={8}>
@@ -50,6 +70,15 @@ export default function Account() {
           Logout
         </Button>
       </HStack>
+      <Button 
+        variant="solid"
+        colorScheme="teal"
+        onClick={handleMyBooking}
+      >
+        My Booking
+      </Button>
+
+
       <br /> <br /> <br /> <br />
       <HStack spacing={8} className="b1"justify="center" mt={8}>
         <Button

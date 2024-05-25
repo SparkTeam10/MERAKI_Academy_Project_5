@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+
+import React, { useState, Suspense, useEffect } from "react";
+import { useLoaderData, useNavigate, Await } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Button, HStack } from "@chakra-ui/react";
@@ -74,6 +77,7 @@ export default function Register() {
         });
       });
   };
+
 
   return (
     <div className="main">
@@ -185,20 +189,3 @@ export default function Register() {
 };
 
 
-/* 
- <input
-          placeholder="Image"
-          type="text"
-          onChange={(e) => {
-            setImage(e.target.value);
-          }}
-        />
-
-         <input
-          placeholder="Image URL"
-          type="text"
-          value={img}
-          onChange={(e) => setImg(e.target.value)}
-        />
-
-*/

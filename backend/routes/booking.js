@@ -5,20 +5,20 @@ const authorization = require("../middleware/authorization")
 
 
 
-const { createBooking , updateBookingById, ReadAllByUserId ,
+const { createBooking , updateBookingById, /*ReadAllByUserId*/ GetAllByUserId,
      updateByUserId , deleteById} = require("../controllers/booking")
 
 
 
 bookingRouter.post("/",authentication, createBooking)
 
-bookingRouter.put("/:id",authentication , authorization("create_category"),updateBookingById)
+bookingRouter.put("/:id",authentication , authorization("update_booking"),updateBookingById)
 
 
-bookingRouter.get("/:serviceProviderId/:userId", authentication, ReadAllByUserId);
+// bookingRouter.get("/:serviceProviderId/:userId", authentication, ReadAllByUserId);
 
 
-// bookingRouter.get("/:user_id" ,authentication , ReadAllByUserId )
+bookingRouter.get("/:user_id" ,authentication , GetAllByUserId )
 
 bookingRouter.delete("/:id" ,authentication , deleteById)
 

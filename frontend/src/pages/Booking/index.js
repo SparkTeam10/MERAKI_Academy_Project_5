@@ -10,25 +10,6 @@ import { createSelector } from "reselect";
 
 
 
-// const selectAuthToken = createSelector(
-//   (state) => state.auth,
-//   (auth) => auth.token
-// );
-
-// const selectUserId = createSelector(
-//   (state) => state.auth,
-//   (auth) => auth.userId
-// );
-
-// const selectServiceProviderId = createSelector(
-//   (state) => state.auth,
-//   (auth) => auth.serviceProviderId 
-// );
-
-// const selectServiceProviderById = createSelector(
-//   [(state) => state.service.service, (_, id) => id],
-//   (services, id) => services.find(service => service.id === id)
-// );
 
 export default function Booking() {
  
@@ -157,14 +138,7 @@ export default function Booking() {
         value={price}
         readOnly
       />
-      <br />
-      <input
-        placeholder="booking_status"
-        type="text"
-        value={bookingStatus}
-        onChange={(e) => setBookingStatus(e.target.value)}
-      />
-      <br />
+      
       <Button onClick={handleBookingSubmit}>Confirm</Button>
       <Button onClick={() => navigate(-1)}>BACK</Button>
       <Button onClick={()=> navigate("/") }>Home</Button>
