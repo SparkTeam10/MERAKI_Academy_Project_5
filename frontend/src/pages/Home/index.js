@@ -30,7 +30,7 @@ const Home = () => {
     <Box className="slider" position="relative">
       <Heading as="h1" size="xl" mb={5} textAlign="center">
         Welcome to Book and{" "}
-        <Text as="span" color="teal.500">
+        <Text as="span" >
           Go
         </Text>
       </Heading>

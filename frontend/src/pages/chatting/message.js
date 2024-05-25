@@ -13,6 +13,7 @@ import {
   Box,
   HStack
 } from "@chakra-ui/react";
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
 import { useNavigate } from "react-router-dom";
 const Message = ({ socket }) => {
   const [to, setTo] = useState("");
@@ -98,13 +99,10 @@ const Message = ({ socket }) => {
     </Flex>
   ))}
 </Box>
-<HStack spacing={8} className="b1" mt="10">
+<HStack spacing={8} className="navigation-buttons">
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaHome />}
           onClick={() => {
             navigate("/");
           }}
@@ -112,11 +110,8 @@ const Message = ({ socket }) => {
           Home
         </Button>
         <Button
-          variant="outline"
-          colorScheme="teal"
-          bg="navy"
-          color="white"
-          borderColor="navy"
+          colorScheme="yellow"
+          leftIcon={<FaArrowLeft />}
           onClick={() => {
             navigate(-1);
           }}

@@ -5,6 +5,10 @@ import {  useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import Swal from "sweetalert2";
 
+
+
+import "./style.css"
+
 export default function Login(){
   
     const dispatch = useDispatch()
@@ -23,14 +27,15 @@ export default function Login(){
     const [msg, setMsg] = useState("");
     const [success, setSuccess] = useState(false);
 
-if(email==="admin@yahoo.com" && password==="111"){
-navigate('/Admin')
-}
+// if(email==="admin@yahoo.com" && password==="111"){
+// navigate('/Admin')
+// }
     return(
         <div className="login">
-            <h3>Welcome to your favorite booking website</h3>
+        <div className="text">
+            <h3 className="texth3">Welcome to your favorite booking website</h3>
             <input
-            placeholder="email"
+            placeholder="Email"
             type="text"
             onChange={(e)=>{
                 setEmail(e.target.value)
@@ -38,7 +43,7 @@ navigate('/Admin')
             />
             <br /> 
             <input
-            placeholder="password"
+            placeholder="Password"
             type="password"
             onChange={(e)=>{
              setPassword(e.target.value)
@@ -81,14 +86,6 @@ navigate('/Admin')
             }}>login</button>
 
             <br /> 
-            <button
-              className="logout"
-              onClick={() => {
-                dispatch(setLogout(false));
-              }}
-            >
-              Logout
-            </button>
             <button onClick={()=>{
                 navigate("/register")
                 
@@ -98,12 +95,9 @@ navigate('/Admin')
                 navigate("/")
             }}>Home</button>
             <br/>
-            <button onClick={()=>{
-                navigate(-1)
-            }}>Back</button>
-           
-
+            </div>
         </div>
 
     )
-}
+} 
+

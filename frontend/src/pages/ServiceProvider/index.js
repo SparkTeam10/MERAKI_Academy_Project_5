@@ -3,10 +3,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux";
-
 import { setCreatService } from "../../Service/redux/reducers/serviceprovider"
 
-
+import  "./style.css"
 
 
 
@@ -15,11 +14,9 @@ export default function ServiceProvider() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const token = useSelector((state) => state.auth.token)
-
     const category = useSelector((state) => state.auth.category)
 
     const [category_id,setCategory_Id]=useState("");
-    
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [address, setAddress] = useState("");
@@ -48,7 +45,8 @@ export default function ServiceProvider() {
       };
 
     return (
-        <div>
+        <div className="wrapper">
+        <div className="con">
             <input
                 placeholder="Title"
                 type="text"
@@ -68,19 +66,17 @@ export default function ServiceProvider() {
                     setAddress(e.target.value)
                 }}
             />
-
-
-            <input
-                placeholder="Image URL"
-                type="text"
-                value={img}
-                onChange={(e) => setImg(e.target.value)}
-            />
             <input
                 type="file"
                 onChange={(e)=>{
                     
                     uploadImage(e.target.files)}}
+            />
+            <input
+                placeholder="Image URL"
+                type="text"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
             />
             <input
                 placeholder="Price" type="number"
@@ -111,7 +107,8 @@ export default function ServiceProvider() {
                         description,
                         address,
                         img,
-                        price,
+                        price: parseFloat(price),
+                        //Ensure is number
                         category_id
                         
                     },
@@ -122,7 +119,8 @@ export default function ServiceProvider() {
                     console.log(resulte);
                     setStatus(true);
                     setError(resulte.data.message);
-                    dispatch(setCreatService(resulte.data.product[0]))
+                    dispatch(setCreatService(resulte.data.product[0]));
+                   
 
                 })
                     .catch((error) => {
@@ -130,11 +128,12 @@ export default function ServiceProvider() {
                         setStatus(false);
                         setError(error.message);
                     })
-            }}>Create Service</Button>
-
+            }}>Create Service
+            </Button>
+            {status && <p className="success">Service created successfully!</p>}
+            {error && <p className="error">{error}</p>}
             <br></br>
-            <Button
-                onClick={() => {
+            <Button onClick={() => {
                     navigate("/");
                 }}
             >
@@ -149,7 +148,9 @@ export default function ServiceProvider() {
                 Back
             </button>
         </div>
+    </div>
     )
 };
+
 
 

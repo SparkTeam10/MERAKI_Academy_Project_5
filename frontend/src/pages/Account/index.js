@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom";
 import Navbar from "../../components/Navbar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {setLogin,setUserId,setLogout} from "../../Service/redux/reducers/auth"
 import { HStack, Button, Text } from "@chakra-ui/react";
 import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa";
 import Swal from 'sweetalert2'; 
 import "./style.css";
-
 
 export default function Account() {
   const navigate = useNavigate();
@@ -28,13 +28,17 @@ export default function Account() {
   };
 
 
+
   return (
     <div>
-      <Text fontSize="2xl" fontWeight="bold">
+      <HStack spacing={8} className="b1"justify="center" mt={8}>
+      <Text fontSize="2xl" fontWeight="bold" >
         ACCOUNT
       </Text>
+      </HStack>
+      
       <br /> <br />
-      <HStack spacing={8} className="action-buttons">
+      <HStack spacing={8} className="b1"justify="center" mt={8}>
         <Button
           variant="solid"
           colorScheme="teal"
@@ -55,6 +59,16 @@ export default function Account() {
         >
           Chat
         </Button>
+        <Button
+          variant="solid"
+          colorScheme="teal"
+          className="logout"
+          onClick={() => {
+            dispatch(setLogout(false));
+          }}
+        >
+          Logout
+        </Button>
       </HStack>
       <Button 
         variant="solid"
@@ -66,7 +80,7 @@ export default function Account() {
 
 
       <br /> <br /> <br /> <br />
-      <HStack spacing={8} className="navigation-buttons">
+      <HStack spacing={8} className="b1"justify="center" mt={8}>
         <Button
           colorScheme="yellow"
           leftIcon={<FaHome />}

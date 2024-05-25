@@ -11,13 +11,13 @@ export default function Main() {
       </Box>
       {/*  #FFDAB9 #800020 87CEEB*/}
       <Flex as="main" flex="1" direction="column" p={4}>
-        <Center bg="teal.500" py={2} mb={4} borderRadius="md">
+        <Center bg="#F2E32E" py={2} mb={4} borderRadius="md" fontWeight="bold">
           <Flex as="nav" gap={14} justify="center">
             <Link
               as={NavLink}
               to="category"
               _hover={{ textDecoration: "none", color: "teal.300" }}
-              color="white"
+              color="navy"
             >
               Category
             </Link>
@@ -25,32 +25,24 @@ export default function Main() {
               as={NavLink}
               to="/allserviceprovider"
               _hover={{ textDecoration: "none", color: "teal.300" }}
-              color="white"
+              color="navy"
             >
-              All-Service
+              All Services
             </Link>
             <Link
               as={NavLink}
               to="/rated"
               _hover={{ textDecoration: "none", color: "teal.300" }}
-              color="white"
+              color="navy"
             >
               Top Rated
             </Link>
-            <Link
-              as={NavLink}
-              to="Booking"
-              _hover={{ textDecoration: "none", color: "teal.300" }}
-              color="white"
-            >
-              Booking
-            </Link>
-          </Flex>
+                     </Flex>
         </Center>
         <Outlet />
       </Flex>
       <Flow/>
-      <Box as="footer" bg="#C0C0C0" py={4} mt="auto" boxShadow="sm">
+      <Box as="footer" bg="#F5EF86" py={4} mt="auto" boxShadow="sm">
       <VStack spacing={4} alignItems="center">
         <Text>Follow us:</Text>
         <HStack spacing={4} justifyContent="center">
@@ -70,7 +62,7 @@ export default function Main() {
         <Box textAlign="center">
           <Text>Contact with us:</Text>
           <Text>Email: book&go@gmail.com</Text>
-          <Text>Phone: +962787023107</Text>
+          <Text>Phone: (+962787023107)-(+962788807567)</Text>
         </Box>
         <Text>&copy; 2024 Spark. All rights reserved.</Text>
       </VStack>

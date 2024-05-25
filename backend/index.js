@@ -4,13 +4,14 @@ const socket = require("socket.io");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
+const db = require("./models/db");
+const PORT = process.env.PORT || 5001;
+
 
 const server = http.createServer(app);
 const io = socket(server, { cors: { origin: "*" } });
 // const server = http.createServer(app);
 // const io = socketIo(server)
-const db = require("./models/db");
-const PORT = process.env.PORT || 5001;
 const auth=require('./middleware/auth')
 const messageHandler=require('./controllers/message')
 const validUser=require('./middleware/validUser')
