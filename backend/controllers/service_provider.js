@@ -1,7 +1,12 @@
 const { pool } = require("../models/db");
 
 const createServiceProvider = (req, res) => {
-  const { title, description, address, img, price, category_id } = req.body;
+  let { title, description, address, img, price, category_id } = req.body;
+  if (price === '' || isNaN(price)) {
+    price = null;
+  } else {
+    price = parseInt(price, 10);
+  }
   pool
     .query(
       `INSERT INTO service_provider(title,description,address,img,price, category_id) VALUES ($1, $2, $3, $4, $5,$6) RETURNING *`,
@@ -19,7 +24,7 @@ const createServiceProvider = (req, res) => {
       res.status(400).json({
         success: false,
         message: "Something went wrong",
-        err,
+        error : error.massage,
       });
     });
 };

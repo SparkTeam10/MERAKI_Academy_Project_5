@@ -13,7 +13,7 @@ const Help = () => {
         <div className="contact-info">
           <h2>Contact Information:</h2>
           <p>Email: spark@gmail.com</p>
-          <p>Phone Number:  +962787023107</p>
+          <p>Phone Number:  (+962787023107)-(+962788807567)</p>
         </div>
       </div>
     </div>

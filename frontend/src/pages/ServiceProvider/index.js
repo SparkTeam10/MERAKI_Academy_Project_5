@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from "react-redux";
-
 import { setCreatService } from "../../Service/redux/reducers/serviceprovider"
 
 import  "./style.css"
@@ -15,7 +14,6 @@ export default function ServiceProvider() {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const token = useSelector((state) => state.auth.token)
-
     const category = useSelector((state) => state.auth.category)
 
     const [category_id,setCategory_Id]=useState("");
@@ -109,7 +107,8 @@ export default function ServiceProvider() {
                         description,
                         address,
                         img,
-                        price,
+                        price: parseFloat(price),
+                        //Ensure is number
                         category_id
                         
                     },
@@ -120,7 +119,8 @@ export default function ServiceProvider() {
                     console.log(resulte);
                     setStatus(true);
                     setError(resulte.data.message);
-                    dispatch(setCreatService(resulte.data.product[0]))
+                    dispatch(setCreatService(resulte.data.product[0]));
+                   
 
                 })
                     .catch((error) => {
