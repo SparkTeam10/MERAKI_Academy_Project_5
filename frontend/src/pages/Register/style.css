@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-image: url('https://cdn.arabsstock.com/uploads/videos/23398/clip-23398-close-up-top-saudi-arabian-gulf-man-putting-flight-ticket-thumbnail.png');
+  background-image: url('https://res.cloudinary.com/diuwwiwqs/image/upload/v1713560563/6666_ki8ref.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -57,7 +57,6 @@ button span.play {
   display: flex;
   justify-content: center;
   gap: 10px;
-  
   margin-top: 0px;
 }
 
@@ -72,6 +71,14 @@ button span.play {
   transition: background-color 0.3s ease;
 }
 
+.filee{
+  background-color: white;
+ 
+}
 
+.filee:hover {
+  background-color: black;
+  color: white;
+}
 
 

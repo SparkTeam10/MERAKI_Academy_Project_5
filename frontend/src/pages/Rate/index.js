@@ -76,7 +76,7 @@ const Rate = () => {
             onChange={(e) => setUserName(e.target.value)}
           />
           <Input
-            placeholder="Enter rating"
+            placeholder="Enter rating as 5.0"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
           />

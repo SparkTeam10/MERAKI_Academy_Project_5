@@ -62,7 +62,7 @@ export default function Main() {
         <Box textAlign="center">
           <Text>Contact with us:</Text>
           <Text>Email: book&go@gmail.com</Text>
-          <Text>Phone: +962787023107</Text>
+          <Text>Phone: (+962787023107)-(+962788807567)</Text>
         </Box>
         <Text>&copy; 2024 Spark. All rights reserved.</Text>
       </VStack>

@@ -18,6 +18,26 @@ export default function Register() {
   const [error1, setError] = useState("");
   const [status, setStatus] = useState(false);
   const [password, setPassword] = useState("");
+  const [img, setImg] = useState("");
+
+  const uploadImage = (files) => {
+    const formData = new FormData();
+
+    formData.append("file", files[0]);
+    formData.append("upload_preset", "gdciwpq7");
+    fetch(
+      "https://api.cloudinary.com/v1_1/diuwwiwqs/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setImg(data.secure_url);
+
+      });
+  };
 
   const handleRegister = (url) => {
     axios
@@ -93,13 +113,15 @@ export default function Register() {
           }}
         />
         <br />
-        <input
-          placeholder="Image"
-          type="text"
+        <input className="filee"
+          type="file"
           onChange={(e) => {
-            setImage(e.target.value);
+
+            uploadImage(e.target.files)
           }}
         />
+       
+
         <br />
         <input
           placeholder="Email"
@@ -160,4 +182,23 @@ export default function Register() {
       </HStack>
     </div>
   );
-}
+};
+
+
+/* 
+ <input
+          placeholder="Image"
+          type="text"
+          onChange={(e) => {
+            setImage(e.target.value);
+          }}
+        />
+
+         <input
+          placeholder="Image URL"
+          type="text"
+          value={img}
+          onChange={(e) => setImg(e.target.value)}
+        />
+
+*/
