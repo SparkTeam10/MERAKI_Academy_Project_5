@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useState, Suspense, useEffect } from "react";
 import { useLoaderData, useNavigate, Await } from "react-router-dom";
 import axios from "axios";
 import Button from "react-bootstrap/Button";
@@ -26,7 +26,9 @@ export default function Register() {
   const [password, setPassword] = useState("");
 
 
-
+ useEffect(()=>{
+  axios.post
+ })
 
 
 

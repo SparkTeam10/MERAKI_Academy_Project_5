@@ -1,11 +1,32 @@
 import { NavLink } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { HStack, Button, Text } from "@chakra-ui/react";
-import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa"; 
+import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa";
+import Swal from 'sweetalert2'; 
 import "./style.css";
+
+
 export default function Account() {
   const navigate = useNavigate();
+  const user_id =useSelector((state) => state.auth.userId);
+  const token = useSelector((state) => state.auth.token);
+
+
+  const handleMyBooking = () => {
+    if (!token) {
+      Swal.fire({
+        icon: "error",
+        title: "You are not logged in",
+        text: "Please log in to view your bookings.",
+      });
+      navigate("/login");
+    } else {
+      navigate(`/mybooking/${user_id}`);
+    }
+  };
+
 
   return (
     <div>
@@ -35,6 +56,15 @@ export default function Account() {
           Chat
         </Button>
       </HStack>
+      <Button 
+        variant="solid"
+        colorScheme="teal"
+        onClick={handleMyBooking}
+      >
+        My Booking
+      </Button>
+
+
       <br /> <br /> <br /> <br />
       <HStack spacing={8} className="navigation-buttons">
         <Button

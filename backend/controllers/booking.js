@@ -72,40 +72,71 @@ const updateBookingById = (req, res) => {
     });
 };
 
-const ReadAllByUserId = (req, res) => {
-  const { user_id } = req.params;
+// const ReadAllByUserId = (req, res) => {
+//   const { user_id } = req.params.user_id;;
 
-  const query = `SELECT * FROM booking WHERE is_deleted=0 AND id=$1 `;
-  const data = [user_id];
+//   const query = `SELECT * FROM booking WHERE is_deleted=0 AND id=$1 `;
+//   const data = [user_id];
+
+//   pool
+//     .query(query, data)
+//     .then((result) => {
+//       if (result.rows.length) {
+//         res.status(201).json({
+//           success: true,
+//           message: `Read all the booking by id successfully `,
+//           result: result.rows,
+//         });
+//       }else{
+//         res.status(400).json({
+//             success: false,
+//             message: `There is no booking for this user yet`,
+            
+//           });
+//       }
+      
+//     })
+//     .catch((err) => {
+//       res.status(500).json({
+//         success: false,
+//         message: `Server Error`,
+//         error : err.message
+       
+//       });
+//     });
+// };
+
+const GetAllByUserId = (req, res) => {
+  const { user_id } = req.params; 
+  console.log(user_id);
+
+  const query = `SELECT * FROM booking WHERE is_deleted=0 AND user_id=$1`; 
+  const data = [user_id]; 
 
   pool
     .query(query, data)
     .then((result) => {
       if (result.rows.length) {
-        res.status(201).json({
+        res.status(200).json({
           success: true,
-          message: `Read all the booking by id successfully `,
+          message: `Read all the booking by user id successfully`,
           result: result.rows,
         });
-      }else{
-        res.status(400).json({
-            success: false,
-            message: `There is no booking for this user yet`,
-            
-          });
+      } else {
+        res.status(404).json({
+          success: false,
+          message: `There is no booking for this user yet`,
+        });
       }
-      
     })
     .catch((err) => {
       res.status(500).json({
         success: false,
         message: `Server Error`,
-        error : err.message
-       
+        error: err.message,
       });
     });
 };
-
 
 const updateByUserId = (req, res)=>{
     const {user_id} = req.params
@@ -198,7 +229,8 @@ const deleteById = (req,res)=>{
 module.exports = {
  createBooking,
   updateBookingById,
-  ReadAllByUserId,
+  // ReadAllByUserId,
+  GetAllByUserId,
   updateByUserId,
   deleteById
 };

@@ -19,6 +19,7 @@ import Chat from "../pages/chatting/index";
 import Message from "../pages/chatting/message";
 import Flow from "../pages/FLOW/Flow";
 import My from "../pages/Myaccount/My";
+import AllBooking from "../pages/AllBooking/AllBooking";
 // import Rated from "../pages/rated";
 
 
@@ -93,6 +94,7 @@ export const router = createBrowserRouter([
  
   {
     path: "/booking/:serviceProviderId/:userId/:price",
+  
     element: <Booking />,
   },
  {
@@ -108,7 +110,10 @@ export const router = createBrowserRouter([
 element: <Message/>
     }
   ]
- },
+ },{
+  path: "/mybooking/:user_id",
+  element: <AllBooking/>
+},
  {
   path:"/myOwnAccount",
   element: <My/>
