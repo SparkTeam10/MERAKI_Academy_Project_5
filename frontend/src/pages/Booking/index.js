@@ -1,72 +1,28 @@
-
-import React, { useState, useEffect } from "react";
-import { useNavigate , useParams} from "react-router-dom";
-import { setBooking, addBooking } from "../../Service/redux/reducers/booking";
+import React, { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { addBooking } from "../../Service/redux/reducers/booking";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { createSelector } from "reselect";
-
-
-
+import { FaHome, FaArrowLeft } from "react-icons/fa";
+import { Box, Button, Input } from "@chakra-ui/react"; 
+import BGimg from "../Booking/bg4.jpeg";
+import logo from "../Booking/icon.jpg";
 
 export default function Booking() {
- 
   const { serviceProviderId, userId, price } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
-  console.log(token);
-
-
-  // const serviceProvider = useSelector((state) => selectServiceProviderById(state, serviceProviderId));
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  // const [price, setPrice] = useState("");
   const [bookingStatus, setBookingStatus] = useState("");
-  // const [userIdInput, setUserIdInput] = useState(userId);
   const [msg, setMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-
-  console.log("serviceProviderId>>>>" ,serviceProviderId);
-  console.log("userId>>>>>>" , userId);
-  console.log("price>>>>", price);
-
-
-
-  // useEffect(() => {
-  //   const getBooking = async () => {
-  //     try {
-  //       const res = await axios.get(`http://localhost:5001/booking/${serviceProviderId}/${userId}`, {
-          
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       });
-  //       const data = res.data;
-  //       dispatch(setBooking(data.booking));
-  //       console.log("res >>>>" ,res);
-  //       console.log("dispatch(setBooking(data.booking))>>>>>>",res.data.booking);
-        
-
-  //     } catch (error) {
-  //       console.error("Error fetching bookings:", error.message);
-  //     }
-  //   };
-
-  //   if (token) {
-  //     getBooking();
-  //   } else {
-  //     console.error("Token is missing");
-  //   }
-  // }, [dispatch, token, userId,serviceProviderId ]);
-
   const handleBookingSubmit = () => {
     axios
-
       .post(
         `http://localhost:5001/booking/`,
         {
@@ -78,17 +34,13 @@ export default function Booking() {
           user_id: userId,
         },
         {
-          headers:{
+          headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       )
-      .then(
-        (result) => {
-          console.log(result);
+      .then((result) => {
         const newBooking = result.data.booking;
-        console.log(result.data.booking);
-        // dispatch(setBooking(result.data.token))
         dispatch(addBooking(newBooking));
         setSuccess(true);
         setMsg(result.data.message);
@@ -106,46 +58,118 @@ export default function Booking() {
       .catch((error) => {
         console.error("Error creating booking:", error.message);
         setSuccess(false);
-        setMsg("Please try again, something went wrong")
+        setMsg("Please try again, something went wrong");
         Swal.fire({
           icon: "error",
           title: "Error",
-          text:  " Please try again something went wrong",
+          text: " Please try again something went wrong",
         });
       });
   };
 
   return (
-    <div className="Booking">
-      <h3>Booking Confirmation</h3>
-      <input
-        placeholder="start_date"
-        type="date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-      />
-      <br />
-      <input
-        placeholder="end_date"
-        type="date"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-      />
-      <br />
-      <input
-        placeholder="price"
-        type="number"
-        value={price}
-        readOnly
-      />
+    <Box textAlign="center" background={`url(${BGimg})`} backgroundSize="cover" backgroundPosition="center" minHeight="100vh" padding="100px">
+      <Box marginBottom="50px">
+        <h3 style={{ color: "black", marginTop: "20px", fontSize: "40px", fontFamily: "Arial, sans-serif" ,backgroundColor: "#FFFFFF80"}}>Enjoy A Luxury Experience</h3>
+      </Box>
+
+      <h4 style={{ color: "black", marginBottom: "20px", fontSize: "24px" ,backgroundColor: "#FFFFFF80" }}>Ready to book? Let's get started!</h4>
+
+      <Box marginBottom="20px">
+        <h3 style={{ color: "black", marginBottom: "20px", fontSize: "24px", backgroundColor: "#FFFFFF80" }}>Booking Confirmation</h3>
+      </Box>
+     
+      <Box display="flex" justifyContent="center" marginBottom="20px">
+        <label htmlFor="startDate" style={{ color: "black", fontSize: "25px", marginRight: "10px" }}>From:</label>
+        <Input
+          id="startDate"
+          placeholder="Start Date" 
+          type="date" 
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          style={{ width: "calc(50% - 5px)", borderRadius: "8px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", padding: "10px", marginRight: "10px" }}
+        />
+        
+        <label htmlFor="endDate" style={{ color: "black", fontSize: "25px", marginRight: "10px" }}>To:</label>
+        <Input
+          id="endDate"
+          placeholder="End Date"
+          type="date"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          style={{ width: "calc(50% - 5px)", borderRadius: "8px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", padding: "10px", marginLeft: "10px" }}
+        />
+      </Box>
       
-      <Button onClick={handleBookingSubmit}>Confirm</Button>
-      <Button onClick={() => navigate(-1)}>BACK</Button>
-      <Button onClick={()=> navigate("/") }>Home</Button>
-    </div>
+      <Box display="flex" justifyContent="center" marginBottom="20px">
+        <label style={{ color: "black", fontSize: "25px", marginRight: "10px" }}>Price:</label>
+        <Input
+          placeholder="Price"
+          type="number"
+          value={price}
+          readOnly
+          style={{ width: "calc(50% - 5px)", borderRadius: "8px", boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", padding: "10px", marginRight: "10px" }}
+        />
+      </Box>
+
+      <Box display="flex" justifyContent="center" marginBottom="20px">
+        <Button
+          onClick={handleBookingSubmit}
+          _hover={{ bg: "#ffcc00", color: "black" }}
+          borderRadius="8px"
+          padding="12px 24px"
+          fontSize="16px"
+          fontWeight="bold"
+          cursor="pointer"
+          boxShadow="0 6px 12px rgba(0, 0, 0, 0.15)"
+          backgroundColor="#FFFFFF80"
+          color="teal"
+          border="none"
+          width="50%"
+        >
+          Confirm
+        </Button>
+      </Box>
+
+      <Box display="flex" justifyContent="center" >
+        <Button
+          onClick={() => {
+            navigate("/");
+          }}
+          _hover={{ bg: "#e6b800", color: "black" }}
+          borderRadius="8px"
+          padding="12px 24px"
+          fontSize="16px"
+          fontWeight="bold"
+          backgroundColor="#ffcc00"
+          color="black"
+          border="none"
+          cursor="pointer"
+          marginRight="10px"
+          boxShadow="0 6px 12px rgba(0, 0, 0, 0.15)"
+        >
+          <FaHome style={{ marginRight: "8px" }} />
+          Home
+        </Button>
+        <Button
+          onClick={() => {
+            navigate(-1);
+          }}
+          _hover={{ bg: "#e6b800", color: "black" }}
+          borderRadius="8px"
+          padding="12px 24px"
+          fontSize="16px"
+          fontWeight="bold"
+          backgroundColor="#ffcc00"
+          color="black"
+          border="none"
+          cursor="pointer"
+          boxShadow="0 6px 12px rgba(0, 0, 0, 0.15)"
+        >
+          <FaArrowLeft style={{ marginRight: "8px" }} />
+          Back
+        </Button>
+      </Box>
+    </Box>
   );
 }
-
-
-
-

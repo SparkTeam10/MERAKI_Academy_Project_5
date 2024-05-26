@@ -1,6 +1,6 @@
 
 import React, { useState, Suspense, useEffect } from "react";
-import { useLoaderData, useNavigate, Await } from "react-router-dom";
+import { useLoaderData, Await } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";

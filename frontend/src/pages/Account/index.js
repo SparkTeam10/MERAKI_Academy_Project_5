@@ -8,12 +8,15 @@ import { FaHome, FaUser, FaComments, FaArrowLeft } from "react-icons/fa";
 import Swal from 'sweetalert2'; 
 import "./style.css";
 
+
 export default function Account() {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const user_id =useSelector((state) => state.auth.userId);
   const token = useSelector((state) => state.auth.token);
 
 
+  
   const handleMyBooking = () => {
     if (!token) {
       Swal.fire({
@@ -49,6 +52,14 @@ export default function Account() {
         >
           My Profile
         </Button>
+        <Button 
+        variant="solid"
+        colorScheme="teal"
+        onClick={handleMyBooking}
+      >
+        My Booking
+      </Button>
+
         <Button
           variant="solid"
           colorScheme="teal"
@@ -59,7 +70,12 @@ export default function Account() {
         >
           Chat
         </Button>
-        <Button
+      
+      
+
+      </HStack>
+   <HStack spacing={8} className="b1"justify="center" mt={8}>
+   <Button
           variant="solid"
           colorScheme="teal"
           className="logout"
@@ -69,15 +85,7 @@ export default function Account() {
         >
           Logout
         </Button>
-      </HStack>
-      <Button 
-        variant="solid"
-        colorScheme="teal"
-        onClick={handleMyBooking}
-      >
-        My Booking
-      </Button>
-
+   </HStack>
 
       <br /> <br /> <br /> <br />
       <HStack spacing={8} className="b1"justify="center" mt={8}>
